@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-jakarta);
+
+  --color-coral: #FF6B6B;
+  --color-cyan: #00D4FF;
+  --color-violet: #A855F7;
+  --color-lime: #84FF57;
+  --color-gold: #FBBF24;
+  --color-dark: #0F0F23;
+  --color-dark-mid: #1A1A3E;
+  --color-off-white: #F8FAFC;
+  --color-gray-muted: #94A3B8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Typography helpers ──────────────────────── */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ─── Brand utilities ─────────────────────────── */
+
+.gradient-text {
+  background: linear-gradient(90deg, #FF6B6B, #A855F7, #00D4FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-btn {
+  background: linear-gradient(135deg, #FF6B6B, #A855F7);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.gradient-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
+}
+
+/* ─── Hero background ─────────────────────────── */
+
+.hero-bg {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(255, 107, 107, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 60% 40%, rgba(168, 85, 247, 0.12), transparent),
+    radial-gradient(ellipse 70% 50% at 80% 80%, rgba(0, 212, 255, 0.10), transparent),
+    linear-gradient(135deg, #0F0F23 0%, #1A1A3E 50%, #0F0F23 100%);
+}
+
+/* ─── Cards ───────────────────────────────────── */
+
+.card-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.08),
+    rgba(0, 212, 255, 0.05)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.card-light {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.card-light:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(168, 85, 247, 0.12);
+}
+
+/* ─── Keyframe animations ─────────────────────── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes float-delay {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Animation classes ───────────────────────── */
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-delay {
+  animation: float-delay 6s ease-in-out infinite 2s;
+  will-change: transform;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ─── Reduced motion overrides ────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delay,
+  .animate-pulse-glow {
+    animation: none;
+  }
+
+  .gradient-btn,
+  .card-light {
+    transition: none;
+  }
+}
+
+/* ─── Focus ring utility ──────────────────────── */
+
+:focus-visible {
+  outline: 2px solid #A855F7;
+  outline-offset: 2px;
+}
+
+/* ─── Scrollbar (webkit) — subtle ─────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
