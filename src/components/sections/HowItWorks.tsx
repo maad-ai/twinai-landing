@@ -1,23 +1,24 @@
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { Upload, BrainCircuit, CircleDollarSign } from 'lucide-react';
 
 const steps = [
   {
     step: '01',
-    icon: '🎤',
+    icon: Upload,
     title: 'Upload Your Content',
     desc: 'Connect YouTube, TikTok, Instagram, or upload videos and posts directly. Our AI analyzes your speaking style, expertise, and personality.',
     color: '#FF6B6B',
   },
   {
     step: '02',
-    icon: '🧠',
+    icon: BrainCircuit,
     title: 'Train & Customize',
     desc: 'Your twin learns how you think and talk. Fine-tune its responses, set topics it can discuss, and make it sound authentically you.',
     color: '#A855F7',
   },
   {
     step: '03',
-    icon: '💰',
+    icon: CircleDollarSign,
     title: 'Set Price & Earn',
     desc: 'Choose your monthly subscription price. Share your twin link. Get paid every month while your twin handles thousands of conversations.',
     color: '#00D4FF',
@@ -55,9 +56,17 @@ export function HowItWorks() {
                   }}
                   aria-hidden="true"
                 />
-                <span className="text-5xl mb-4 block" role="img" aria-label={item.title}>
-                  {item.icon}
-                </span>
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+                  style={{ background: `${item.color}12` }}
+                >
+                  <item.icon
+                    className="w-7 h-7"
+                    style={{ color: item.color }}
+                    strokeWidth={1.8}
+                    aria-hidden="true"
+                  />
+                </div>
                 <p className="text-sm font-700 mb-2" style={{ color: item.color }}>
                   STEP {item.step}
                 </p>

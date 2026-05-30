@@ -1,15 +1,30 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ComponentType } from 'react';
+import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { TwinCoachMike, TwinSarahGlow, TwinAlexCapital } from '@/components/ui/Avatars';
 
-const demoConversations = [
+interface CreatorProfile {
+  name: string;
+  niche: string;
+  photo: string;
+  TwinAvatar: ComponentType<{ size?: number }>;
+  tagColor: string;
+}
+
+interface DemoConversation {
+  creator: CreatorProfile;
+  messages: { from: 'user' | 'twin'; text: string }[];
+}
+
+const demoConversations: DemoConversation[] = [
   {
     creator: {
       name: 'Coach Mike',
       niche: 'Fitness',
-      avatar: 'CM',
-      gradient: 'from-[#FF6B6B] to-[#A855F7]',
+      photo: '/influencers/coach-mike.jpg',
+      TwinAvatar: TwinCoachMike,
       tagColor: 'text-[#FF6B6B] bg-[#FF6B6B]/10',
     },
     messages: [
@@ -32,8 +47,8 @@ const demoConversations = [
     creator: {
       name: 'Sarah Glow',
       niche: 'Skincare',
-      avatar: 'SG',
-      gradient: 'from-[#00D4FF] to-[#A855F7]',
+      photo: '/influencers/sarah-glow.jpg',
+      TwinAvatar: TwinSarahGlow,
       tagColor: 'text-[#00D4FF] bg-[#00D4FF]/10',
     },
     messages: [
@@ -53,8 +68,8 @@ const demoConversations = [
     creator: {
       name: 'Alex Capital',
       niche: 'Investing',
-      avatar: 'AC',
-      gradient: 'from-[#84FF57] to-[#00D4FF]',
+      photo: '/influencers/alex-capital.jpg',
+      TwinAvatar: TwinAlexCapital,
       tagColor: 'text-[#84FF57] bg-[#84FF57]/10',
     },
     messages: [
@@ -82,6 +97,7 @@ export function InteractiveDemo() {
   const chatRef = useRef<HTMLDivElement>(null);
 
   const convo = demoConversations[activeCreator];
+  const { TwinAvatar } = convo.creator;
 
   useEffect(() => {
     setVisibleMessages(0);
@@ -148,18 +164,19 @@ export function InteractiveDemo() {
                   role="tab"
                   aria-selected={activeCreator === i}
                   onClick={() => setActiveCreator(i)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-200 text-sm font-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] ${
+                  className={`flex items-center gap-2.5 px-4 py-2 rounded-full border transition-all duration-200 text-sm font-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] ${
                     activeCreator === i
                       ? 'border-[#A855F7] bg-[#A855F7]/10 text-[#A855F7] shadow-sm'
                       : 'border-black/10 text-[#94A3B8] hover:border-[#A855F7]/30 hover:text-[#0F0F23]'
                   }`}
                 >
-                  <div
-                    className={`w-6 h-6 rounded-full bg-gradient-to-br ${c.creator.gradient} flex items-center justify-center text-[9px] font-bold text-white flex-shrink-0`}
-                    aria-hidden="true"
-                  >
-                    {c.creator.avatar}
-                  </div>
+                  <Image
+                    src={c.creator.photo}
+                    alt=""
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 rounded-full object-cover"
+                  />
                   {c.creator.name}
                 </button>
               ))}
@@ -171,11 +188,18 @@ export function InteractiveDemo() {
             <div className="card-light rounded-2xl overflow-hidden" role="tabpanel" aria-label={`Chat with ${convo.creator.name}`}>
               {/* Chat header */}
               <div className="flex items-center gap-3 px-5 py-4 border-b border-black/5 bg-white">
-                <div
-                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${convo.creator.gradient} flex items-center justify-center text-sm font-bold text-white flex-shrink-0`}
-                  aria-hidden="true"
-                >
-                  {convo.creator.avatar}
+                {/* Photo + twin badge */}
+                <div className="relative flex-shrink-0">
+                  <Image
+                    src={convo.creator.photo}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full ring-2 ring-white">
+                    <TwinAvatar size={20} />
+                  </div>
                 </div>
                 <div className="min-w-0">
                   <p className="font-display font-700 text-[#0F0F23] text-sm">{convo.creator.name}</p>
@@ -203,11 +227,8 @@ export function InteractiveDemo() {
                     style={{ animation: 'fadeSlideIn 0.4s cubic-bezier(0.4,0,0.2,1)' }}
                   >
                     {msg.from === 'twin' && (
-                      <div
-                        className={`w-7 h-7 rounded-full bg-gradient-to-br ${convo.creator.gradient} flex-shrink-0 flex items-center justify-center text-[8px] font-bold text-white mt-1`}
-                        aria-hidden="true"
-                      >
-                        {convo.creator.avatar}
+                      <div className="flex-shrink-0 mt-1">
+                        <TwinAvatar size={28} />
                       </div>
                     )}
                     <div
@@ -224,11 +245,8 @@ export function InteractiveDemo() {
 
                 {isTyping && (
                   <div className="flex gap-2" aria-label={`${convo.creator.name} is typing`}>
-                    <div
-                      className={`w-7 h-7 rounded-full bg-gradient-to-br ${convo.creator.gradient} flex-shrink-0 flex items-center justify-center text-[8px] font-bold text-white mt-1`}
-                      aria-hidden="true"
-                    >
-                      {convo.creator.avatar}
+                    <div className="flex-shrink-0 mt-1">
+                      <TwinAvatar size={28} />
                     </div>
                     <div className="bg-white px-4 py-3 rounded-2xl rounded-tl-sm shadow-sm border border-black/5">
                       <div className="flex gap-1.5">

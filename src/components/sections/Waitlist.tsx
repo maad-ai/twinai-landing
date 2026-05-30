@@ -1,4 +1,5 @@
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { Mic, MessagesSquare, Check } from 'lucide-react';
 
 export function Waitlist() {
   return (
@@ -25,10 +26,10 @@ export function Waitlist() {
             <div className="card-light rounded-2xl p-8 h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div
-                  className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex items-center justify-center flex-shrink-0"
+                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex items-center justify-center flex-shrink-0"
                   aria-hidden="true"
                 >
-                  <span className="text-white text-lg">🎤</span>
+                  <Mic className="w-5 h-5 text-white" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-display font-700 text-lg text-[#0F0F23]">I&apos;m a Creator</h3>
@@ -116,10 +117,10 @@ export function Waitlist() {
             <div className="card-light rounded-2xl p-8 h-full flex flex-col">
               <div className="flex items-center gap-3 mb-6">
                 <div
-                  className="w-10 h-10 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#A855F7] flex items-center justify-center flex-shrink-0"
+                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#A855F7] flex items-center justify-center flex-shrink-0"
                   aria-hidden="true"
                 >
-                  <span className="text-white text-lg">💬</span>
+                  <MessagesSquare className="w-5 h-5 text-white" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-display font-700 text-lg text-[#0F0F23]">I&apos;m a Fan</h3>
@@ -160,7 +161,7 @@ export function Waitlist() {
                           '3 free messages with any twin',
                         ].map((perk) => (
                           <li key={perk} className="flex items-center gap-2">
-                            <span className="text-[#84FF57] flex-shrink-0" aria-hidden="true">&#10003;</span>
+                            <Check className="w-4 h-4 text-[#84FF57] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
                             {perk}
                           </li>
                         ))}
@@ -173,20 +174,6 @@ export function Waitlist() {
           </ScrollReveal>
         </div>
 
-        <ScrollReveal delay={250}>
-          <div className="text-center mt-10">
-            <p className="text-[#94A3B8]">
-              <span
-                className="font-display font-800 text-2xl gradient-text"
-                aria-label="27 out of 50"
-              >
-                27 / 50
-              </span>
-              <br />
-              <span className="text-sm">early creator spots remaining</span>
-            </p>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );

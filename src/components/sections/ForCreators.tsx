@@ -1,11 +1,14 @@
+import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { TwinSarahK } from '@/components/ui/Avatars';
+import { Banknote, Clock, Target, TrendingUp, ShieldCheck } from 'lucide-react';
 
 const benefits = [
-  { emoji: '💸', text: 'Keep 85–90% of every subscription — we only take 10–15%' },
-  { emoji: '🕐', text: 'Your twin works 24/7 — answer thousands of fans simultaneously' },
-  { emoji: '🎯', text: 'Deeper connections = better retention than any other monetization' },
-  { emoji: '📈', text: 'Average creator earns $2K–8K/month (depends on audience size)' },
-  { emoji: '🔒', text: 'Full control — set limits, review conversations, block topics' },
+  { icon: Banknote, color: '#84FF57', text: 'Keep 85–90% of every subscription — we only take 10–15%' },
+  { icon: Clock, color: '#00D4FF', text: 'Your twin works 24/7 — answer thousands of fans simultaneously' },
+  { icon: Target, color: '#FF6B6B', text: 'Deeper connections = better retention than any other monetization' },
+  { icon: TrendingUp, color: '#FBBF24', text: 'Average creator earns $2K–8K/month (depends on audience size)' },
+  { icon: ShieldCheck, color: '#A855F7', text: 'Full control — set limits, review conversations, block topics' },
 ];
 
 const stats = [
@@ -39,9 +42,17 @@ export function ForCreators() {
               <ul className="space-y-5" aria-label="Creator benefits">
                 {benefits.map((item, i) => (
                   <li key={i} className="flex items-start gap-4">
-                    <span className="text-2xl flex-shrink-0" role="img" aria-hidden="true">
-                      {item.emoji}
-                    </span>
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: `${item.color}15` }}
+                    >
+                      <item.icon
+                        className="w-5 h-5"
+                        style={{ color: item.color }}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+                    </div>
                     <span className="text-lg text-[#94A3B8] leading-relaxed">{item.text}</span>
                   </li>
                 ))}
@@ -51,18 +62,24 @@ export function ForCreators() {
 
           {/* Right: fake dashboard */}
           <ScrollReveal delay={150}>
-            <div className="card-glass rounded-2xl p-8">
+            <div className="card-glass rounded-2xl p-5 sm:p-8">
               <p className="text-xs font-600 uppercase tracking-widest text-[#94A3B8] mb-4">
                 Example creator dashboard
               </p>
 
-              {/* Creator info */}
+              {/* Creator info — photo + twin */}
               <div className="flex items-center gap-4 mb-6">
-                <div
-                  className="w-14 h-14 rounded-full bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex items-center justify-center text-xl font-bold text-white flex-shrink-0"
-                  aria-hidden="true"
-                >
-                  SK
+                <div className="relative flex-shrink-0">
+                  <Image
+                    src="/influencers/sarah-k.jpg"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
+                  <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full ring-2 ring-[#1A1A3E]/80">
+                    <TwinSarahK size={28} />
+                  </div>
                 </div>
                 <div>
                   <p className="font-display font-700 text-white">Sarah K.</p>
@@ -71,25 +88,25 @@ export function ForCreators() {
               </div>
 
               {/* Stats grid */}
-              <div className="grid grid-cols-3 gap-4 mb-6" aria-label="Dashboard stats">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6" aria-label="Dashboard stats">
                 {stats.map((stat) => (
-                  <div key={stat.label} className="text-center p-3 rounded-xl bg-white/5">
+                  <div key={stat.label} className="text-center p-2 sm:p-3 rounded-xl bg-white/5">
                     <p
-                      className="font-display font-800 text-2xl"
+                      className="font-display font-800 text-lg sm:text-2xl"
                       style={{ color: stat.color }}
                     >
                       {stat.value}
                     </p>
-                    <p className="text-xs text-[#94A3B8] mt-1">{stat.label}</p>
+                    <p className="text-[10px] sm:text-xs text-[#94A3B8] mt-1 truncate">{stat.label}</p>
                   </div>
                 ))}
               </div>
 
               {/* Earnings bar */}
               <div className="bg-white/5 rounded-xl p-4">
-                <div className="flex justify-between text-sm mb-2">
+                <div className="flex justify-between text-xs sm:text-sm mb-2 gap-2">
                   <span className="text-[#94A3B8]">This month&apos;s earnings</span>
-                  <span className="text-[#84FF57] font-600">+23% vs last month</span>
+                  <span className="text-[#84FF57] font-600 whitespace-nowrap">+23% vs last</span>
                 </div>
                 <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
                   <div

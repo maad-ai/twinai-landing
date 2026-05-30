@@ -27,13 +27,13 @@ export function Pricing() {
           </p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto overflow-visible px-2">
           {tiers.map((tier, i) => (
             <ScrollReveal key={tier.tag} delay={i * 80}>
               <article
                 className={`rounded-2xl p-6 h-full flex flex-col justify-between ${
                   tier.featured
-                    ? 'border-2 border-[#A855F7]/50 scale-105 bg-gradient-to-b from-[#A855F7]/20 to-[#00D4FF]/10'
+                    ? 'border-2 border-[#A855F7]/50 md:scale-105 bg-gradient-to-b from-[#A855F7]/20 to-[#00D4FF]/10'
                     : 'card-glass'
                 }`}
               >

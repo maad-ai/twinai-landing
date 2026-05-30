@@ -1,11 +1,7 @@
+import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-
-const avatars = [
-  { initials: 'JL', gradient: 'from-[#FF6B6B] to-[#A855F7]' },
-  { initials: 'MK', gradient: 'from-[#00D4FF] to-[#A855F7]' },
-  { initials: 'AS', gradient: 'from-[#84FF57] to-[#00D4FF]' },
-  { initials: 'TR', gradient: 'from-[#FBBF24] to-[#FF6B6B]' },
-];
+import { TwinCoachMike } from '@/components/ui/Avatars';
+import { Check, Shield, Moon, Sliders } from 'lucide-react';
 
 export function Hero() {
   return (
@@ -60,15 +56,15 @@ export function Hero() {
             <ScrollReveal delay={220}>
               <div className="flex items-center flex-wrap gap-x-6 gap-y-2 mb-10 text-sm text-[#94A3B8]">
                 <span className="flex items-center gap-2">
-                  <span className="text-[#84FF57]" aria-hidden="true">&#10003;</span>
+                  <Check className="w-4 h-4 text-[#84FF57]" aria-hidden="true" />
                   Keep 85–90%
                 </span>
                 <span className="flex items-center gap-2">
-                  <span className="text-[#84FF57]" aria-hidden="true">&#10003;</span>
+                  <Moon className="w-4 h-4 text-[#84FF57]" aria-hidden="true" />
                   Works while you sleep
                 </span>
                 <span className="flex items-center gap-2">
-                  <span className="text-[#84FF57]" aria-hidden="true">&#10003;</span>
+                  <Shield className="w-4 h-4 text-[#84FF57]" aria-hidden="true" />
                   Full control
                 </span>
               </div>
@@ -93,13 +89,17 @@ export function Hero() {
 
             <ScrollReveal delay={340}>
               <div className="mt-10 flex items-center gap-4">
-                <div className="flex -space-x-3" aria-hidden="true">
-                  {avatars.map((a, i) => (
-                    <div
-                      key={i}
-                      className={`w-10 h-10 rounded-full bg-gradient-to-br ${a.gradient} border-2 border-[#0F0F23] flex items-center justify-center text-xs font-bold text-white`}
-                    >
-                      {a.initials}
+                <div className="flex -space-x-2" aria-hidden="true">
+                  {[0, 1, 2, 3].map((i) => (
+                    <div key={i} className="ring-2 ring-[#0F0F23] rounded-full overflow-hidden">
+                      <Image
+                        src={`/influencers/creator-${i + 1}.jpg`}
+                        alt=""
+                        width={36}
+                        height={36}
+                        className="object-cover"
+                        style={{ width: 36, height: 36 }}
+                      />
                     </div>
                   ))}
                 </div>
@@ -117,8 +117,18 @@ export function Hero() {
                 <div className="rounded-xl overflow-hidden">
                   {/* Chat header */}
                   <div className="flex items-center gap-3 px-4 py-3 bg-[#1A1A3E]/80 border-b border-white/5">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
-                      CM
+                    {/* Real photo + twin badge */}
+                    <div className="relative flex-shrink-0">
+                      <Image
+                        src="/influencers/coach-mike.jpg"
+                        alt=""
+                        width={36}
+                        height={36}
+                        className="w-9 h-9 rounded-full object-cover"
+                      />
+                      <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full ring-2 ring-[#1A1A3E]">
+                        <TwinCoachMike size={20} />
+                      </div>
                     </div>
                     <div>
                       <p className="font-display font-700 text-white text-sm">Coach Mike</p>
@@ -127,13 +137,16 @@ export function Hero() {
                         <span className="text-[11px] text-[#94A3B8]">AI Twin &bull; Online</span>
                       </div>
                     </div>
+                    <div className="ml-auto">
+                      <Sliders className="w-4 h-4 text-[#94A3B8]/50" aria-hidden="true" />
+                    </div>
                   </div>
 
                   {/* Chat messages */}
                   <div className="p-4 space-y-3 bg-[#0F0F23]/60">
                     <div className="flex gap-2">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex-shrink-0 flex items-center justify-center text-[7px] font-bold text-white mt-0.5" aria-hidden="true">
-                        CM
+                      <div className="flex-shrink-0 mt-0.5">
+                        <TwinCoachMike size={24} />
                       </div>
                       <div className="bg-white/10 rounded-xl rounded-tl-sm px-3 py-2 text-[13px] text-white/90 max-w-[85%]">
                         Hey! I&apos;m Coach Mike&apos;s AI twin. Trained on 500+ workouts and nutrition guides. Ask me anything!
@@ -145,8 +158,8 @@ export function Hero() {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex-shrink-0 flex items-center justify-center text-[7px] font-bold text-white mt-0.5" aria-hidden="true">
-                        CM
+                      <div className="flex-shrink-0 mt-0.5">
+                        <TwinCoachMike size={24} />
                       </div>
                       <div className="bg-white/10 rounded-xl rounded-tl-sm px-3 py-2 text-[13px] text-white/90 max-w-[85%]">
                         3 days is plenty! Full-body split: squats, deadlifts, bench each session. Progressive overload every week...
