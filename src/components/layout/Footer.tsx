@@ -2,7 +2,7 @@ export function Footer() {
   return (
     <footer className="bg-[#0F0F23] py-12 border-t border-white/5">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div>
             <p className="font-display font-800 text-xl text-white tracking-tight mb-1">
               twiinn<span className="gradient-text">.ai</span>
