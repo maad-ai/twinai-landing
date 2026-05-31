@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { TwinCoachMike } from '@/components/ui/Avatars';
-import { Check, Shield, Moon, Sliders } from 'lucide-react';
+import { Check, Shield, Moon, Sliders, Send } from 'lucide-react';
 
 export function Hero() {
   return (
@@ -111,9 +111,9 @@ export function Hero() {
           </div>
 
           {/* Right: Chat preview card */}
-          <div className="hidden lg:block">
+          <div className="mt-4 lg:mt-0">
             <ScrollReveal delay={200}>
-              <div className="card-glass rounded-2xl p-1 rotate-1 hover:rotate-0 transition-transform duration-500">
+              <div className="card-glass rounded-2xl p-1 lg:rotate-1 lg:hover:rotate-0 transition-transform duration-500 max-w-md mx-auto lg:max-w-none">
                 <div className="rounded-xl overflow-hidden">
                   {/* Chat header */}
                   <div className="flex items-center gap-3 px-4 py-3 bg-[#1A1A3E]/80 border-b border-white/5">
@@ -168,11 +168,11 @@ export function Hero() {
                   </div>
 
                   {/* Fake input */}
-                  <div className="px-4 py-2.5 bg-[#0F0F23]/60 border-t border-white/5">
-                    <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/5">
-                      <span className="text-[12px] text-white/30 flex-1">Ask Coach Mike anything...</span>
-                      <div className="px-2 py-1 rounded bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
-                        <span className="text-white text-[10px] font-600">Send</span>
+                  <div className="px-4 py-3 bg-[#0F0F23]/60 border-t border-white/5">
+                    <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 border border-white/8">
+                      <span className="text-[13px] text-white/30 flex-1">Ask Coach Mike anything...</span>
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] flex items-center justify-center flex-shrink-0">
+                        <Send className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
                       </div>
                     </div>
                   </div>

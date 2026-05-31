@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, type ComponentType } from 'react';
 import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { Send } from 'lucide-react';
 import { TwinCoachMike, TwinSarahGlow, TwinAlexCapital } from '@/components/ui/Avatars';
 
 interface CreatorProfile {
@@ -282,8 +283,8 @@ export function InteractiveDemo() {
               <div className="px-5 py-3 border-t border-black/5 bg-white">
                 <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#F8FAFC] border border-black/5" aria-hidden="true">
                   <span className="text-sm text-[#94A3B8]/50 flex-1">Type a message...</span>
-                  <div className="gradient-btn px-3 py-1.5 rounded-lg">
-                    <span className="text-white text-xs font-600">Send</span>
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] flex items-center justify-center flex-shrink-0">
+                    <Send className="w-4 h-4 text-white" strokeWidth={2.5} />
                   </div>
                 </div>
               </div>
