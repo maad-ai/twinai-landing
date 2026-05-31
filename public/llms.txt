@@ -1,0 +1,36 @@
+# Twiinn AI
+
+> Twiinn AI is a SaaS marketplace where influencers and creators build AI chatbot clones of themselves. Fans subscribe monthly to chat with these AI twins 24/7. Creators keep 85-90% of subscription revenue.
+
+## What is Twiinn AI?
+
+Twiinn AI lets content creators (fitness coaches, finance experts, beauty influencers, tech educators, etc.) create an AI-powered chatbot trained on their content — videos, posts, podcasts, and more. The AI twin thinks, talks, and advises like the creator. Fans pay a monthly subscription to access personalized conversations with the AI twin anytime.
+
+## How it works
+
+1. **Create** — Upload your content or connect your social accounts. We train an AI that mirrors your personality, expertise, and communication style.
+2. **Launch** — Set your subscription price ($9.99–$49.99/month). Your AI twin goes live and is available 24/7.
+3. **Earn** — Fans subscribe to chat with your twin. You keep 85–90% of every subscription. We handle payments, hosting, and AI infrastructure.
+
+## Business model
+
+- Creators set their own subscription price
+- Platform commission: 10–15% (early creators get 0% for 6 months)
+- Fans get unlimited conversations with subscribed twins
+- Average creator earnings: $2K–$8K/month depending on audience size
+
+## Key features
+
+- AI trained on creator's actual content and personality
+- 24/7 availability — the twin never sleeps
+- Full creator control — set limits, review conversations, block topics
+- Real-time chat with streaming responses
+- Creator dashboard with earnings, subscribers, and message analytics
+
+## Links
+
+- Website: https://twiinn.ai
+- Waitlist: https://twiinn.ai/#waitlist
+- Contact: contact@twiinn.ai
+- Privacy Policy: https://twiinn.ai/privacy
+- Terms of Service: https://twiinn.ai/terms
