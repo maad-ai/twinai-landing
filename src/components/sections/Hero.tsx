@@ -6,7 +6,7 @@ import { Check, Shield, Moon, Sliders } from 'lucide-react';
 export function Hero() {
   return (
     <section
-      className="hero-bg min-h-screen flex items-center relative overflow-hidden pt-16"
+      className="hero-bg min-h-[100dvh] flex items-center relative overflow-hidden pt-16"
       aria-label="Hero"
     >
       {/* Background blobs */}
@@ -48,7 +48,7 @@ export function Hero() {
 
             <ScrollReveal delay={160}>
               <p className="text-lg md:text-xl text-[#94A3B8] max-w-xl mb-4 leading-relaxed">
-                Twin AI creates a chatbot trained on your content — it thinks, talks, and advises like you. Fans subscribe monthly.{' '}
+                Twiinn AI creates a chatbot trained on your content — it thinks, talks, and advises like you. Fans subscribe monthly.{' '}
                 <span className="text-white font-500">You earn 24/7.</span>
               </p>
             </ScrollReveal>

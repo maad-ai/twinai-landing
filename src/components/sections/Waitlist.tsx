@@ -1,7 +1,73 @@
+'use client';
+
+import { useState } from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-import { Mic, MessagesSquare, Check } from 'lucide-react';
+import { Mic, MessagesSquare, Check, Loader2 } from 'lucide-react';
+
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export function Waitlist() {
+  const [creatorStatus, setCreatorStatus] = useState<FormStatus>('idle');
+  const [fanStatus, setFanStatus] = useState<FormStatus>('idle');
+
+  async function handleCreatorSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setCreatorStatus('loading');
+
+    const form = e.currentTarget;
+    const data = {
+      type: 'creator',
+      name: (form.elements.namedItem('creator-name') as HTMLInputElement).value,
+      email: (form.elements.namedItem('creator-email') as HTMLInputElement).value,
+      handle: (form.elements.namedItem('creator-handle') as HTMLInputElement).value,
+      followers: (form.elements.namedItem('creator-followers') as HTMLInputElement).value,
+      niche: (form.elements.namedItem('creator-niche') as HTMLSelectElement).value,
+    };
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setCreatorStatus('success');
+      } else {
+        setCreatorStatus('error');
+      }
+    } catch {
+      setCreatorStatus('error');
+    }
+  }
+
+  async function handleFanSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFanStatus('loading');
+
+    const form = e.currentTarget;
+    const data = {
+      type: 'fan',
+      email: (form.elements.namedItem('fan-email') as HTMLInputElement).value,
+    };
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setFanStatus('success');
+      } else {
+        setFanStatus('error');
+      }
+    } catch {
+      setFanStatus('error');
+    }
+  }
+
   return (
     <section id="waitlist" className="bg-white py-24 md:py-32" aria-label="Join the waitlist">
       <div className="max-w-[1200px] mx-auto px-6">
@@ -37,78 +103,112 @@ export function Waitlist() {
                 </div>
               </div>
 
-              <form noValidate aria-label="Creator waitlist signup">
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="creator-name" className="sr-only">Your name</label>
-                    <input
-                      id="creator-name"
-                      type="text"
-                      placeholder="Your name"
-                      autoComplete="name"
-                      className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
-                    />
+              {creatorStatus === 'success' ? (
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <div className="w-14 h-14 rounded-full bg-[#84FF57]/20 flex items-center justify-center mb-4">
+                    <Check className="w-7 h-7 text-[#22C55E]" strokeWidth={2.5} />
                   </div>
-                  <div>
-                    <label htmlFor="creator-email" className="sr-only">Email address</label>
-                    <input
-                      id="creator-email"
-                      type="email"
-                      placeholder="Email address"
-                      autoComplete="email"
-                      className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="creator-handle" className="sr-only">Social handle</label>
-                    <input
-                      id="creator-handle"
-                      type="text"
-                      placeholder="@instagram / @tiktok / @youtube"
-                      className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <p className="font-display font-700 text-lg text-[#0F0F23] mb-1">
+                    You&apos;re on the list!
+                  </p>
+                  <p className="text-sm text-[#94A3B8]">We&apos;ll reach out soon with next steps.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleCreatorSubmit} noValidate aria-label="Creator waitlist signup">
+                  <div className="space-y-4">
                     <div>
-                      <label htmlFor="creator-followers" className="sr-only">Follower count</label>
+                      <label htmlFor="creator-name" className="sr-only">Your name</label>
                       <input
-                        id="creator-followers"
+                        id="creator-name"
+                        name="creator-name"
                         type="text"
-                        placeholder="Followers count"
+                        placeholder="Your name"
+                        required
+                        autoComplete="name"
                         className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
                       />
                     </div>
                     <div>
-                      <label htmlFor="creator-niche" className="sr-only">Your niche</label>
-                      <select
-                        id="creator-niche"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#94A3B8] focus:outline-none focus:border-[#A855F7]/40 transition-all"
-                      >
-                        <option value="">Your niche</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="finance">Finance</option>
-                        <option value="beauty">Beauty</option>
-                        <option value="gaming">Gaming</option>
-                        <option value="cooking">Cooking</option>
-                        <option value="tech">Tech</option>
-                        <option value="lifestyle">Lifestyle</option>
-                        <option value="other">Other</option>
-                      </select>
+                      <label htmlFor="creator-email" className="sr-only">Email address</label>
+                      <input
+                        id="creator-email"
+                        name="creator-email"
+                        type="email"
+                        placeholder="Email address"
+                        required
+                        autoComplete="email"
+                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
+                      />
                     </div>
+                    <div>
+                      <label htmlFor="creator-handle" className="sr-only">Social handle</label>
+                      <input
+                        id="creator-handle"
+                        name="creator-handle"
+                        type="text"
+                        placeholder="@instagram / @tiktok / @youtube"
+                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="creator-followers" className="sr-only">Follower count</label>
+                        <input
+                          id="creator-followers"
+                          name="creator-followers"
+                          type="text"
+                          placeholder="Followers count"
+                          className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="creator-niche" className="sr-only">Your niche</label>
+                        <select
+                          id="creator-niche"
+                          name="creator-niche"
+                          className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#94A3B8] focus:outline-none focus:border-[#A855F7]/40 transition-all"
+                        >
+                          <option value="">Your niche</option>
+                          <option value="fitness">Fitness</option>
+                          <option value="finance">Finance</option>
+                          <option value="beauty">Beauty</option>
+                          <option value="gaming">Gaming</option>
+                          <option value="cooking">Cooking</option>
+                          <option value="tech">Tech</option>
+                          <option value="lifestyle">Lifestyle</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={creatorStatus === 'loading'}
+                      className="w-full gradient-btn text-white font-600 py-3.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {creatorStatus === 'loading' ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        'Create My Twin →'
+                      )}
+                    </button>
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full gradient-btn text-white font-600 py-3.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7]"
-                  >
-                    Create My Twin &rarr;
-                  </button>
-                </div>
-              </form>
+                  {creatorStatus === 'error' && (
+                    <p className="text-sm text-red-500 mt-3 text-center">
+                      Something went wrong. Please try again.
+                    </p>
+                  )}
+                </form>
+              )}
 
-              <p className="text-xs text-[#94A3B8] mt-4 text-center">
-                First 50 creators get{' '}
-                <span className="font-600 text-[#FF6B6B]">0% commission for 6 months</span>
-              </p>
+              {creatorStatus !== 'success' && (
+                <p className="text-xs text-[#94A3B8] mt-4 text-center">
+                  First 50 creators get{' '}
+                  <span className="font-600 text-[#FF6B6B]">0% commission for 6 months</span>
+                </p>
+              )}
             </div>
           </ScrollReveal>
 
@@ -128,48 +228,76 @@ export function Waitlist() {
                 </div>
               </div>
 
-              <form noValidate aria-label="Fan waitlist signup" className="flex flex-col flex-1">
-                <div className="space-y-4 flex-1 flex flex-col">
-                  <div>
-                    <label htmlFor="fan-email" className="sr-only">Your email address</label>
-                    <input
-                      id="fan-email"
-                      type="email"
-                      placeholder="Your email address"
-                      autoComplete="email"
-                      className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#00D4FF]/40 focus:bg-[#00D4FF]/[0.02] transition-all"
-                    />
+              {fanStatus === 'success' ? (
+                <div className="flex flex-col items-center justify-center py-12 text-center flex-1">
+                  <div className="w-14 h-14 rounded-full bg-[#00D4FF]/20 flex items-center justify-center mb-4">
+                    <Check className="w-7 h-7 text-[#00D4FF]" strokeWidth={2.5} />
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full text-white font-600 py-3.5 rounded-xl hover:shadow-lg hover:shadow-[#00D4FF]/20 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D4FF]"
-                    style={{ background: 'linear-gradient(135deg, #00D4FF, #A855F7)' }}
-                  >
-                    Get Early Access &rarr;
-                  </button>
+                  <p className="font-display font-700 text-lg text-[#0F0F23] mb-1">
+                    You&apos;re in!
+                  </p>
+                  <p className="text-sm text-[#94A3B8]">We&apos;ll notify you when we launch.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleFanSubmit} noValidate aria-label="Fan waitlist signup" className="flex flex-col flex-1">
+                  <div className="space-y-4 flex-1 flex flex-col">
+                    <div>
+                      <label htmlFor="fan-email" className="sr-only">Your email address</label>
+                      <input
+                        id="fan-email"
+                        name="fan-email"
+                        type="email"
+                        placeholder="Your email address"
+                        required
+                        autoComplete="email"
+                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#00D4FF]/40 focus:bg-[#00D4FF]/[0.02] transition-all"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={fanStatus === 'loading'}
+                      className="w-full text-white font-600 py-3.5 rounded-xl hover:shadow-lg hover:shadow-[#00D4FF]/20 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D4FF] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      style={{ background: 'linear-gradient(135deg, #00D4FF, #A855F7)' }}
+                    >
+                      {fanStatus === 'loading' ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        'Get Early Access →'
+                      )}
+                    </button>
 
-                  <div className="flex-1 flex flex-col justify-end">
-                    <div className="bg-[#F8FAFC] rounded-xl p-5 mt-4">
-                      <p className="text-sm font-600 text-[#0F0F23] mb-3">
-                        As an early fan, you&apos;ll get:
+                    {fanStatus === 'error' && (
+                      <p className="text-sm text-red-500 text-center">
+                        Something went wrong. Please try again.
                       </p>
-                      <ul className="space-y-2.5 text-sm text-[#94A3B8]">
-                        {[
-                          'First access to new twins',
-                          '50% off your first month',
-                          'VIP badge on your profile',
-                          '3 free messages with any twin',
-                        ].map((perk) => (
-                          <li key={perk} className="flex items-center gap-2">
-                            <Check className="w-4 h-4 text-[#84FF57] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
-                            {perk}
-                          </li>
-                        ))}
-                      </ul>
+                    )}
+
+                    <div className="flex-1 flex flex-col justify-end">
+                      <div className="bg-[#F8FAFC] rounded-xl p-5 mt-4">
+                        <p className="text-sm font-600 text-[#0F0F23] mb-3">
+                          As an early fan, you&apos;ll get:
+                        </p>
+                        <ul className="space-y-2.5 text-sm text-[#94A3B8]">
+                          {[
+                            'First access to new twins',
+                            '50% off your first month',
+                            'VIP badge on your profile',
+                            '3 free messages with any twin',
+                          ].map((perk) => (
+                            <li key={perk} className="flex items-center gap-2">
+                              <Check className="w-4 h-4 text-[#84FF57] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
+                              {perk}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              )}
             </div>
           </ScrollReveal>
         </div>

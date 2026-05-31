@@ -41,9 +41,9 @@ export function Header() {
         <a
           href="#"
           className="font-display font-800 text-xl text-white tracking-tight hover:opacity-80 transition-opacity"
-          aria-label="Twin AI — Home"
+          aria-label="Twiinn AI — Home"
         >
-          twin<span className="gradient-text">.ai</span>
+          twiinn<span className="gradient-text">.ai</span>
         </a>
 
         {/* Desktop nav */}

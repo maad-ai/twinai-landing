@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans, Outfit } from 'next/font/google';
 import './globals.css';
 
 const jakarta = Plus_Jakarta_Sans({
@@ -9,10 +9,10 @@ const jakarta = Plus_Jakarta_Sans({
   display: 'swap',
 });
 
-const inter = Inter({
-  variable: '--font-inter',
+const outfit = Outfit({
+  variable: '--font-outfit',
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500', '600'],
   display: 'swap',
 });
 
@@ -23,10 +23,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://twin.ai'),
+  metadataBase: new URL('https://twiinn.ai'),
   title: {
-    default: 'Twin AI — Your Voice. Their World. 24/7.',
-    template: '%s | Twin AI',
+    default: 'Twiinn AI — Your Voice. Their World. 24/7.',
+    template: '%s | Twiinn AI',
   },
   description:
     'Create an AI twin of yourself. Let your audience connect with you even when you\'re offline. Fans subscribe monthly — you keep 85–90% and earn 24/7.',
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     'passive income creator',
     'twin AI',
   ],
-  authors: [{ name: 'Twin AI', url: 'https://twin.ai' }],
-  creator: 'Twin AI',
-  publisher: 'Twin AI',
+  authors: [{ name: 'Twiinn AI', url: 'https://twiinn.ai' }],
+  creator: 'Twiinn AI',
+  publisher: 'Twiinn AI',
   robots: {
     index: true,
     follow: true,
@@ -55,9 +55,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://twin.ai',
-    siteName: 'Twin AI',
-    title: 'Twin AI — Your fans can talk to your AI clone.',
+    url: 'https://twiinn.ai',
+    siteName: 'Twiinn AI',
+    title: 'Twiinn AI — Your fans can talk to your AI clone.',
     description:
       'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85–90% and earn 24/7.',
     images: [
@@ -65,17 +65,17 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Twin AI — AI-powered creator monetization platform',
+        alt: 'Twiinn AI — AI-powered creator monetization platform',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Twin AI — Your fans can talk to your AI clone.',
+    title: 'Twiinn AI — Your fans can talk to your AI clone.',
     description:
       'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85–90%.',
     images: ['/og-image.png'],
-    creator: '@twinai',
+    creator: '@twiinnai',
   },
   icons: {
     icon: '/favicon.ico',
@@ -90,7 +90,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jakarta.variable} ${inter.variable} antialiased`}
+      className={`${jakarta.variable} ${outfit.variable} antialiased`}
     >
       <body className="min-h-screen bg-[#0F0F23]">
         <a

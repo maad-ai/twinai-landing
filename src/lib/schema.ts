@@ -2,8 +2,8 @@ export function getWebApplicationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Twin AI',
-    url: 'https://twin.ai',
+    name: 'Twiinn AI',
+    url: 'https://twiinn.ai',
     description:
       'Create an AI twin of yourself. Let your audience connect with you — even when you\'re offline. Monetize your influence 24/7.',
     applicationCategory: 'SocialNetworkingApplication',
@@ -25,13 +25,13 @@ export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Twin AI',
-    url: 'https://twin.ai',
-    logo: 'https://twin.ai/logo.png',
+    name: 'Twiinn AI',
+    url: 'https://twiinn.ai',
+    logo: 'https://twiinn.ai/logo.png',
     sameAs: [],
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'hello@twin.ai',
+      email: 'contact@maad-ai.com',
       contactType: 'customer support',
     },
   };
@@ -52,7 +52,7 @@ export function getFAQSchema() {
       },
       {
         '@type': 'Question',
-        name: 'How much can I earn with Twin AI?',
+        name: 'How much can I earn with Twiinn AI?',
         acceptedAnswer: {
           '@type': 'Answer',
           text: 'A creator with 50K followers charging $14.99/month could realistically earn $2,000–5,000/month. Creators with 500K+ followers can earn $10K–30K/month.',
@@ -68,7 +68,7 @@ export function getFAQSchema() {
       },
       {
         '@type': 'Question',
-        name: 'What is the Twin AI commission structure?',
+        name: 'What is the Twiinn AI commission structure?',
         acceptedAnswer: {
           '@type': 'Answer',
           text: 'We take a 10–15% platform fee. You keep 85–90% of every subscription. Early creators who join the waitlist get 0% commission for the first 6 months.',
@@ -76,7 +76,7 @@ export function getFAQSchema() {
       },
       {
         '@type': 'Question',
-        name: 'When does Twin AI launch?',
+        name: 'When does Twiinn AI launch?',
         acceptedAnswer: {
           '@type': 'Answer',
           text: 'We are building the MVP now. Join the waitlist to be among the first creators when we launch.',

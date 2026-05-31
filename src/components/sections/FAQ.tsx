@@ -25,7 +25,7 @@ const faqs = [
     a: 'Fans get a set number of messages included in their subscription. If they want more, they can purchase additional message credits. You earn a cut of those too.',
   },
   {
-    q: 'When does Twin AI launch?',
+    q: 'When does Twiinn AI launch?',
     a: "We're building the MVP now. Join the waitlist to be among the first creators when we launch. Early spots are limited to ensure quality onboarding.",
   },
 ];
