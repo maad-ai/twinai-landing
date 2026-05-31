@@ -22,10 +22,10 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { href: '#demo', label: 'Live Demo' },
-    { href: '#how', label: 'How it works' },
-    { href: '#creators', label: 'For Creators' },
-    { href: '#pricing', label: 'Pricing' },
+    { href: '/#demo', label: 'Live Demo' },
+    { href: '/#how', label: 'How it works' },
+    { href: '/#creators', label: 'For Creators' },
+    { href: '/#pricing', label: 'Pricing' },
   ];
 
   return (
@@ -39,7 +39,7 @@ export function Header() {
       <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a
-          href="#"
+          href="/"
           className="hover:opacity-80 transition-opacity"
           aria-label="Twiinn AI — Home"
         >
@@ -63,7 +63,7 @@ export function Header() {
         {/* CTA + hamburger */}
         <div className="flex items-center gap-3">
           <a
-            href="#waitlist"
+            href="/#waitlist"
             className="gradient-btn text-white text-sm font-600 px-5 py-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
           >
             Join Waitlist
