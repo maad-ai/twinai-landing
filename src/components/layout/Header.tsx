@@ -40,10 +40,14 @@ export function Header() {
         {/* Logo */}
         <a
           href="#"
-          className="font-display font-800 text-xl text-white tracking-tight hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           aria-label="Twiinn AI — Home"
         >
-          twiinn<span className="gradient-text">.ai</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="" width={28} height={28} className="w-7 h-7" />
+          <span className="font-display font-800 text-xl text-white tracking-tight">
+            twiinn<span className="gradient-text">.ai</span>
+          </span>
         </a>
 
         {/* Desktop nav */}

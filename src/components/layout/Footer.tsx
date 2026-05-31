@@ -3,10 +3,14 @@ export function Footer() {
     <footer className="bg-[#0F0F23] py-12 border-t border-white/5">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div>
-            <p className="font-display font-800 text-xl text-white tracking-tight mb-1">
-              twiinn<span className="gradient-text">.ai</span>
-            </p>
+          <div className="flex flex-col items-center md:items-start">
+            <div className="flex items-center gap-2 mb-1">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="" width={24} height={24} className="w-6 h-6" />
+              <p className="font-display font-800 text-xl text-white tracking-tight">
+                twiinn<span className="gradient-text">.ai</span>
+              </p>
+            </div>
             <p className="text-xs text-[#94A3B8]">Your Voice. Their World. 24/7.</p>
           </div>
 
