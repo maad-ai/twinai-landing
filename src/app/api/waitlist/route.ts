@@ -1,9 +1,10 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'contact@maad-ai.com';
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'contact@maad-ai.com';
   try {
     const body = await request.json();
     const { type, email, name, handle, followers, niche } = body;
