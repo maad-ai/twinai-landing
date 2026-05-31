@@ -4,13 +4,8 @@ export function Footer() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
-            <div className="flex items-center gap-2 mb-1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="" width={24} height={24} className="w-6 h-6" />
-              <p className="font-display font-800 text-xl text-white tracking-tight">
-                twiinn<span className="gradient-text">.ai</span>
-              </p>
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Twiinn AI" width={32} height={38} className="w-8 h-auto mb-2" />
             <p className="text-xs text-[#94A3B8]">Your Voice. Their World. 24/7.</p>
           </div>
 
