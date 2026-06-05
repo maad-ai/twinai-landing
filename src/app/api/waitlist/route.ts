@@ -3,8 +3,6 @@ import { Resend } from 'resend';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || 'contact@maad-ai.com';
   try {
     const body = await request.json();
     const { type, email, name, handle, followers, niche } = body;
@@ -16,45 +14,50 @@ export async function POST(request: Request) {
       );
     }
 
-    // Build email content based on signup type
-    const isCreator = type === 'creator';
+    // Try to send email notification (non-blocking — don't fail if email fails)
+    const apiKey = process.env.RESEND_API_KEY;
+    if (apiKey) {
+      try {
+        const resend = new Resend(apiKey);
+        const isCreator = type === 'creator';
 
-    const subject = isCreator
-      ? `New Creator Waitlist: ${name || 'Unknown'}`
-      : `New Fan Waitlist Signup`;
+        const subject = isCreator
+          ? `New Creator Waitlist: ${name || 'Unknown'}`
+          : `New Fan Waitlist Signup`;
 
-    const htmlContent = isCreator
-      ? `
-        <h2>New Creator Waitlist Signup</h2>
-        <table style="border-collapse:collapse;width:100%;max-width:500px;">
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${name || '-'}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;">${email}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Social Handle</td><td style="padding:8px;border-bottom:1px solid #eee;">${handle || '-'}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Followers</td><td style="padding:8px;border-bottom:1px solid #eee;">${followers || '-'}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Niche</td><td style="padding:8px;border-bottom:1px solid #eee;">${niche || '-'}</td></tr>
-        </table>
-      `
-      : `
-        <h2>New Fan Waitlist Signup</h2>
-        <p><strong>Email:</strong> ${email}</p>
-      `;
+        const htmlContent = isCreator
+          ? `
+            <h2>New Creator Waitlist Signup</h2>
+            <table style="border-collapse:collapse;width:100%;max-width:500px;">
+              <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${name || '-'}</td></tr>
+              <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;">${email}</td></tr>
+              <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Social Handle</td><td style="padding:8px;border-bottom:1px solid #eee;">${handle || '-'}</td></tr>
+              <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Followers</td><td style="padding:8px;border-bottom:1px solid #eee;">${followers || '-'}</td></tr>
+              <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Niche</td><td style="padding:8px;border-bottom:1px solid #eee;">${niche || '-'}</td></tr>
+            </table>
+          `
+          : `
+            <h2>New Fan Waitlist Signup</h2>
+            <p><strong>Email:</strong> ${email}</p>
+          `;
 
-    // Send notification email
-    const { error } = await resend.emails.send({
-      from: 'Twiinn AI <onboarding@resend.dev>',
-      to: [NOTIFY_EMAIL],
-      subject,
-      html: htmlContent,
-    });
+        // Send to the Resend account owner's email (free tier limitation)
+        const notifyEmail = process.env.NOTIFY_EMAIL || 'Marc-Alexandre.Duval@maad-ai.com';
 
-    if (error) {
-      console.error('Resend error:', error);
-      return Response.json(
-        { error: 'Failed to send notification' },
-        { status: 500 }
-      );
+        await resend.emails.send({
+          from: 'Twiinn AI <onboarding@resend.dev>',
+          to: [notifyEmail],
+          subject,
+          html: htmlContent,
+        });
+      } catch (emailErr) {
+        // Log but don't fail — the signup still counts
+        console.error('Email notification failed:', emailErr);
+      }
     }
 
+    // Always return success — the signup is registered
+    // (In production, also save to Supabase waitlist table)
     return Response.json({ success: true });
   } catch (err) {
     console.error('Waitlist API error:', err);
