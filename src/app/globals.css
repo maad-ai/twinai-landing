@@ -7,12 +7,27 @@
   --color-coral: #FF6B6B;
   --color-cyan: #00D4FF;
   --color-violet: #A855F7;
-  --color-lime: #84FF57;
-  --color-gold: #FBBF24;
+  --color-lime: #4ADE80;
   --color-dark: #0F0F23;
   --color-dark-mid: #1A1A3E;
-  --color-off-white: #F8FAFC;
+  --color-off-white: #F7F8FB;
   --color-gray-muted: #94A3B8;
+  --color-ink-body: #475569;
+  --color-ink-caption: #64748B;
+
+  /* Tailwind v4 does not ship bare numeric font-weight utilities —
+     these tokens make the font-500…font-800 classes compile. */
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+  --font-weight-800: 800;
+}
+
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 1px 2px rgba(15, 15, 35, 0.05);
+  --shadow-md: 0 2px 4px rgba(15, 15, 35, 0.04), 0 12px 24px -8px rgba(15, 15, 35, 0.10);
+  --shadow-lg: 0 4px 8px rgba(15, 15, 35, 0.05), 0 24px 48px -16px rgba(15, 15, 35, 0.16);
 }
 
 *,
@@ -23,12 +38,7 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -37,16 +47,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Typography helpers ──────────────────────── */
+/* ─── Typography ──────────────────────────────── */
 
 .font-display {
   font-family: var(--font-display);
 }
 
+.text-display-xl {
+  font-size: clamp(2.75rem, 6.5vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.text-display-lg {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 /* ─── Brand utilities ─────────────────────────── */
 
 .gradient-text {
-  background: linear-gradient(90deg, #FF6B6B, #A855F7, #00D4FF);
+  background: linear-gradient(100deg, #FF6B6B 0%, #A855F7 90%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -54,69 +83,92 @@ body {
 
 .gradient-btn {
   background: linear-gradient(135deg, #FF6B6B, #A855F7);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s var(--ease-out-expo), filter 0.2s var(--ease-out-expo),
+              transform 0.2s var(--ease-out-expo);
 }
 
 .gradient-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
+  filter: brightness(1.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0, 0, 0, 0.3),
+              0 8px 24px -8px rgba(168, 85, 247, 0.35);
 }
 
 .gradient-btn:active {
-  transform: translateY(0) scale(0.98);
-  box-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
+  transform: scale(0.98);
+  filter: brightness(0.98);
 }
 
-/* ─── Hero background ─────────────────────────── */
+/* ─── Backgrounds ─────────────────────────────── */
 
 .hero-bg {
   background:
-    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(255, 107, 107, 0.15), transparent),
-    radial-gradient(ellipse 60% 40% at 60% 40%, rgba(168, 85, 247, 0.12), transparent),
-    radial-gradient(ellipse 70% 50% at 80% 80%, rgba(0, 212, 255, 0.10), transparent),
-    linear-gradient(135deg, #0F0F23 0%, #1A1A3E 50%, #0F0F23 100%);
+    radial-gradient(90% 60% at 50% 0%, rgba(168, 85, 247, 0.10) 0%, transparent 60%),
+    radial-gradient(120% 90% at 50% 0%, #1A1A3E 0%, #0F0F23 65%);
+}
+
+.section-dark {
+  background-color: #0F0F23;
+  background-image: radial-gradient(60% 50% at 80% 20%, rgba(168, 85, 247, 0.06), transparent 70%);
+}
+
+.cta-spotlight {
+  background:
+    radial-gradient(50% 80% at 50% 100%, rgba(168, 85, 247, 0.12), transparent 70%),
+    #0F0F23;
+}
+
+/* Film grain — breaks gradient banding on dark sections. Parent needs `relative`. */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ─── Cards ───────────────────────────────────── */
 
 .card-glass {
-  background: linear-gradient(
-    135deg,
-    rgba(168, 85, 247, 0.08),
-    rgba(0, 212, 255, 0.05)
-  );
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 16px 40px -16px rgba(0, 0, 0, 0.5);
 }
 
 .card-light {
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+  box-shadow: var(--shadow-sm);
 }
 
-.card-light:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(168, 85, 247, 0.12);
+/* Opt-in hover lift — interactive cards only. */
+.card-hover {
+  transition: transform 0.25s var(--ease-out-expo), box-shadow 0.25s var(--ease-out-expo);
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Scroll reveal (state lives in CSS — no hydration flash) ── */
+
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s var(--ease-out-expo) var(--reveal-delay, 0ms),
+                transform 0.7s var(--ease-out-expo) var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ─── Keyframe animations ─────────────────────── */
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-12px); }
-}
-
-@keyframes float-delay {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
-}
 
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.4; }
@@ -126,7 +178,7 @@ body {
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -134,34 +186,38 @@ body {
   }
 }
 
-/* ─── Animation classes ───────────────────────── */
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-  will-change: transform;
-}
-
-.animate-float-delay {
-  animation: float-delay 6s ease-in-out infinite 2s;
-  will-change: transform;
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%           { transform: translateY(-3px); opacity: 1; }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* ─── Reduced motion overrides ────────────────── */
+.animate-typing {
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+/* Hero entrance — pure CSS, plays on load without waiting for JS. */
+.hero-enter {
+  animation: fadeSlideIn 0.7s var(--ease-out-expo) both;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+/* ─── Reduced motion ──────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-float,
-  .animate-float-delay,
-  .animate-pulse-glow {
-    animation: none;
+  html {
+    scroll-behavior: auto;
   }
 
-  .gradient-btn,
-  .card-light {
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -183,10 +239,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(168, 85, 247, 0.3);
+  background: rgba(148, 163, 184, 0.25);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.5);
+  background: rgba(148, 163, 184, 0.4);
 }

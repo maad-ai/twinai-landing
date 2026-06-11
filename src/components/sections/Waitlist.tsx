@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-import { Mic, MessagesSquare, Check, Loader2 } from 'lucide-react';
+import { Mic, MessagesSquare, Check, Loader2, ArrowRight } from 'lucide-react';
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+
+const inputClass =
+  'w-full px-4 py-3 rounded-xl bg-[#F1F2F7] border border-black/[0.06] text-[#0F0F23] placeholder:text-[#64748B]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-white transition-all';
 
 export function Waitlist() {
   const [creatorStatus, setCreatorStatus] = useState<FormStatus>('idle');
@@ -69,49 +72,45 @@ export function Waitlist() {
   }
 
   return (
-    <section id="waitlist" className="bg-white py-24 md:py-32" aria-label="Join the waitlist">
+    <section id="waitlist" className="bg-[#F7F8FB] py-24 md:py-32" aria-label="Join the waitlist">
       <div className="max-w-[1200px] mx-auto px-6">
         <ScrollReveal>
-          <div className="text-center mb-12">
-            <h2
-              className="font-display font-800 text-[#0F0F23] tracking-tight mb-4"
-              style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)' }}
-            >
-              Join the <span className="gradient-text">waitlist</span>
+          <div className="text-center mb-14 md:mb-20">
+            <h2 className="text-display-lg font-display font-800 text-[#0F0F23] mb-4">
+              Join the waitlist
             </h2>
-            <p className="text-lg text-[#94A3B8] max-w-xl mx-auto">
-              Be among the first to launch your AI twin. Early creators get 0% commission for 6
-              months.
+            <p className="text-lg text-[#475569] max-w-xl mx-auto">
+              Be among the first to launch your AI twin.
             </p>
           </div>
         </ScrollReveal>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Creator form */}
-          <ScrollReveal delay={100}>
+          <ScrollReveal delay={80}>
             <div className="card-light rounded-2xl p-8 h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex items-center justify-center flex-shrink-0"
+                  className="w-10 h-10 rounded-xl bg-[#7C3AED]/[0.08] flex items-center justify-center flex-shrink-0"
                   aria-hidden="true"
                 >
-                  <Mic className="w-5 h-5 text-white" strokeWidth={2} />
+                  <Mic className="w-5 h-5 text-[#7C3AED]" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-display font-700 text-lg text-[#0F0F23]">I&apos;m a Creator</h3>
-                  <p className="text-sm text-[#94A3B8]">Create &amp; monetize your AI twin</p>
+                  <p className="text-sm text-[#64748B]">Create &amp; monetize your AI twin</p>
                 </div>
               </div>
 
               {creatorStatus === 'success' ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="w-14 h-14 rounded-full bg-[#84FF57]/20 flex items-center justify-center mb-4">
-                    <Check className="w-7 h-7 text-[#22C55E]" strokeWidth={2.5} />
+                  <div className="w-14 h-14 rounded-full bg-[#16A34A]/10 flex items-center justify-center mb-4">
+                    <Check className="w-7 h-7 text-[#16A34A]" strokeWidth={2.5} />
                   </div>
                   <p className="font-display font-700 text-lg text-[#0F0F23] mb-1">
                     You&apos;re on the list!
                   </p>
-                  <p className="text-sm text-[#94A3B8]">We&apos;ll reach out soon with next steps.</p>
+                  <p className="text-sm text-[#64748B]">We&apos;ll reach out soon with next steps.</p>
                 </div>
               ) : (
                 <form onSubmit={handleCreatorSubmit} noValidate aria-label="Creator waitlist signup">
@@ -125,7 +124,7 @@ export function Waitlist() {
                         placeholder="Your name"
                         required
                         autoComplete="name"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
+                        className={inputClass}
                       />
                     </div>
                     <div>
@@ -137,7 +136,7 @@ export function Waitlist() {
                         placeholder="Email address"
                         required
                         autoComplete="email"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
+                        className={inputClass}
                       />
                     </div>
                     <div>
@@ -147,7 +146,7 @@ export function Waitlist() {
                         name="creator-handle"
                         type="text"
                         placeholder="@instagram / @tiktok / @youtube"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
+                        className={inputClass}
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
@@ -157,8 +156,8 @@ export function Waitlist() {
                           id="creator-followers"
                           name="creator-followers"
                           type="text"
-                          placeholder="Followers count"
-                          className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-[#A855F7]/[0.02] transition-all"
+                          placeholder="Follower count"
+                          className={inputClass}
                         />
                       </div>
                       <div>
@@ -166,7 +165,7 @@ export function Waitlist() {
                         <select
                           id="creator-niche"
                           name="creator-niche"
-                          className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#94A3B8] focus:outline-none focus:border-[#A855F7]/40 transition-all"
+                          className="w-full px-4 py-3 rounded-xl bg-[#F1F2F7] border border-black/[0.06] text-[#64748B] focus:outline-none focus:border-[#A855F7]/40 transition-all"
                         >
                           <option value="">Your niche</option>
                           <option value="fitness">Fitness</option>
@@ -183,7 +182,7 @@ export function Waitlist() {
                     <button
                       type="submit"
                       disabled={creatorStatus === 'loading'}
-                      className="w-full gradient-btn text-white font-600 py-3.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="w-full gradient-btn text-white font-600 py-3.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
                     >
                       {creatorStatus === 'loading' ? (
                         <>
@@ -191,12 +190,18 @@ export function Waitlist() {
                           Sending...
                         </>
                       ) : (
-                        'Create My Twin →'
+                        <>
+                          Request creator access
+                          <ArrowRight
+                            className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                            aria-hidden="true"
+                          />
+                        </>
                       )}
                     </button>
                   </div>
                   {creatorStatus === 'error' && (
-                    <p className="text-sm text-red-500 mt-3 text-center">
+                    <p className="text-sm text-red-600 mt-3 text-center">
                       Something went wrong. Please try again.
                     </p>
                   )}
@@ -204,39 +209,39 @@ export function Waitlist() {
               )}
 
               {creatorStatus !== 'success' && (
-                <p className="text-xs text-[#94A3B8] mt-4 text-center">
-                  First 50 creators get{' '}
-                  <span className="font-600 text-[#FF6B6B]">0% commission for 6 months</span>
+                <p className="text-xs text-[#64748B] mt-4 text-center">
+                  First 50 creators pay{' '}
+                  <span className="font-600 text-[#7C3AED]">0% platform fees for 6 months</span>
                 </p>
               )}
             </div>
           </ScrollReveal>
 
           {/* Fan form */}
-          <ScrollReveal delay={180}>
+          <ScrollReveal delay={140}>
             <div className="card-light rounded-2xl p-8 h-full flex flex-col">
               <div className="flex items-center gap-3 mb-6">
                 <div
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#A855F7] flex items-center justify-center flex-shrink-0"
+                  className="w-10 h-10 rounded-xl bg-[#7C3AED]/[0.08] flex items-center justify-center flex-shrink-0"
                   aria-hidden="true"
                 >
-                  <MessagesSquare className="w-5 h-5 text-white" strokeWidth={2} />
+                  <MessagesSquare className="w-5 h-5 text-[#7C3AED]" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-display font-700 text-lg text-[#0F0F23]">I&apos;m a Fan</h3>
-                  <p className="text-sm text-[#94A3B8]">Chat with AI twins of creators you love</p>
+                  <p className="text-sm text-[#64748B]">Chat with AI twins of creators you love</p>
                 </div>
               </div>
 
               {fanStatus === 'success' ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center flex-1">
-                  <div className="w-14 h-14 rounded-full bg-[#00D4FF]/20 flex items-center justify-center mb-4">
-                    <Check className="w-7 h-7 text-[#00D4FF]" strokeWidth={2.5} />
+                  <div className="w-14 h-14 rounded-full bg-[#16A34A]/10 flex items-center justify-center mb-4">
+                    <Check className="w-7 h-7 text-[#16A34A]" strokeWidth={2.5} />
                   </div>
                   <p className="font-display font-700 text-lg text-[#0F0F23] mb-1">
                     You&apos;re in!
                   </p>
-                  <p className="text-sm text-[#94A3B8]">We&apos;ll notify you when we launch.</p>
+                  <p className="text-sm text-[#64748B]">We&apos;ll notify you when we launch.</p>
                 </div>
               ) : (
                 <form onSubmit={handleFanSubmit} noValidate aria-label="Fan waitlist signup" className="flex flex-col flex-1">
@@ -250,14 +255,13 @@ export function Waitlist() {
                         placeholder="Your email address"
                         required
                         autoComplete="email"
-                        className="w-full px-4 py-3 rounded-xl bg-[#F8FAFC] border border-black/5 text-[#0F0F23] placeholder:text-[#94A3B8]/60 focus:outline-none focus:border-[#00D4FF]/40 focus:bg-[#00D4FF]/[0.02] transition-all"
+                        className={inputClass}
                       />
                     </div>
                     <button
                       type="submit"
                       disabled={fanStatus === 'loading'}
-                      className="w-full text-white font-600 py-3.5 rounded-xl hover:shadow-lg hover:shadow-[#00D4FF]/20 hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D4FF] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                      style={{ background: 'linear-gradient(135deg, #00D4FF, #A855F7)' }}
+                      className="w-full gradient-btn text-white font-600 py-3.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
                     >
                       {fanStatus === 'loading' ? (
                         <>
@@ -265,22 +269,28 @@ export function Waitlist() {
                           Sending...
                         </>
                       ) : (
-                        'Get Early Access →'
+                        <>
+                          Get early access
+                          <ArrowRight
+                            className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                            aria-hidden="true"
+                          />
+                        </>
                       )}
                     </button>
 
                     {fanStatus === 'error' && (
-                      <p className="text-sm text-red-500 text-center">
+                      <p className="text-sm text-red-600 text-center">
                         Something went wrong. Please try again.
                       </p>
                     )}
 
                     <div className="flex-1 flex flex-col justify-end">
-                      <div className="bg-[#F8FAFC] rounded-xl p-5 mt-4">
+                      <div className="bg-[#F1F2F7] rounded-xl p-5 mt-4">
                         <p className="text-sm font-600 text-[#0F0F23] mb-3">
                           As an early fan, you&apos;ll get:
                         </p>
-                        <ul className="space-y-2.5 text-sm text-[#94A3B8]">
+                        <ul className="space-y-2.5 text-sm text-[#475569]">
                           {[
                             'First access to new twins',
                             '50% off your first month',
@@ -288,7 +298,7 @@ export function Waitlist() {
                             '3 free messages with any twin',
                           ].map((perk) => (
                             <li key={perk} className="flex items-center gap-2">
-                              <Check className="w-4 h-4 text-[#84FF57] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
+                              <Check className="w-4 h-4 text-[#16A34A] flex-shrink-0" strokeWidth={2.5} aria-hidden="true" />
                               {perk}
                             </li>
                           ))}

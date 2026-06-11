@@ -10,7 +10,7 @@ const faqs = [
   },
   {
     q: 'How much can I earn?',
-    a: 'It depends on your audience size and pricing. A creator with 50K followers charging $14.99/mo could realistically earn $2,000–5,000/month. Creators with 500K+ followers can earn $10K–30K/month.',
+    a: 'Your earnings = subscribers × your price × 85%. If 1% of a 50K audience subscribes at $14.99/month, that’s about $6,400/month to you. It scales with audience size and engagement — no guarantees.',
   },
   {
     q: "Can my twin say something I wouldn't?",
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "What's the commission structure?",
-    a: 'We take a 10–15% platform fee. You keep 85–90% of every subscription. Early creators who join the waitlist get 0% commission for the first 6 months.',
+    a: 'We take a flat 15% platform fee — you keep 85% of every subscription and message credit. Founding creators pay 0% for their first 6 months.',
   },
   {
     q: 'What if a fan runs out of messages?',
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'When does Twiinn AI launch?',
-    a: "We're building the MVP now. Join the waitlist to be among the first creators when we launch. Early spots are limited to ensure quality onboarding.",
+    a: 'We’re onboarding our first creators now. Waitlist members get access in signup order — creators first, then fans.',
   },
 ];
 
@@ -36,21 +36,21 @@ export function FAQ() {
   const toggle = (i: number) => setOpen(open === i ? null : i);
 
   return (
-    <section className="bg-[#F8FAFC] py-24 md:py-32" aria-label="Frequently Asked Questions">
+    <section className="bg-[#F7F8FB] py-20 md:py-24" aria-label="Frequently Asked Questions">
       <div className="max-w-3xl mx-auto px-6">
         <ScrollReveal>
-          <h2
-            className="font-display font-800 text-[#0F0F23] tracking-tight text-center mb-12"
-            style={{ fontSize: 'clamp(1.875rem, 5vw, 2.5rem)' }}
-          >
-            Frequently Asked Questions
+          <h2 className="text-display-lg font-display font-800 text-[#0F0F23] text-center mb-12">
+            Questions, answered.
           </h2>
         </ScrollReveal>
 
-        <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <ScrollReveal key={i} delay={i * 60}>
-              <div className="card-light rounded-xl overflow-hidden">
+        <ScrollReveal delay={80}>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <div
+                key={i}
+                className="card-light rounded-xl overflow-hidden transition-colors duration-200 hover:border-[#A855F7]/25"
+              >
                 <button
                   className="w-full flex items-center justify-between px-5 py-5 cursor-pointer font-display font-600 text-[#0F0F23] text-left gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] rounded-xl"
                   onClick={() => toggle(i)}
@@ -60,7 +60,7 @@ export function FAQ() {
                 >
                   <span>{faq.q}</span>
                   <span
-                    className="text-[#A855F7] text-xl flex-shrink-0 transition-transform duration-300"
+                    className="text-[#7C3AED] text-xl flex-shrink-0 transition-transform duration-300 [transition-timing-function:var(--ease-out-expo)]"
                     style={{ transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)' }}
                     aria-hidden="true"
                   >
@@ -71,18 +71,22 @@ export function FAQ() {
                   id={`faq-answer-${i}`}
                   role="region"
                   aria-labelledby={`faq-question-${i}`}
-                  className="overflow-hidden transition-all duration-300"
-                  style={{
-                    maxHeight: open === i ? '400px' : '0px',
-                    opacity: open === i ? 1 : 0,
-                  }}
+                  className="grid transition-[grid-template-rows] duration-300 [transition-timing-function:var(--ease-out-expo)]"
+                  style={{ gridTemplateRows: open === i ? '1fr' : '0fr' }}
                 >
-                  <p className="px-5 pb-5 text-[#94A3B8] leading-relaxed">{faq.a}</p>
+                  <div className="overflow-hidden">
+                    <p
+                      className="px-5 pb-5 text-[#475569] leading-relaxed transition-opacity duration-200"
+                      style={{ opacity: open === i ? 1 : 0 }}
+                    >
+                      {faq.a}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -37,13 +37,10 @@ export default function ContactPage() {
                 Get in touch
               </span>
             </div>
-            <h1
-              className="font-display font-800 text-[#0F0F23] tracking-tight mb-4"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
-            >
+            <h1 className="text-display-lg font-display font-800 text-[#0F0F23] mb-4">
               We&apos;d love to hear from you
             </h1>
-            <p className="text-lg text-[#94A3B8] max-w-xl mx-auto">
+            <p className="text-lg text-[#475569] max-w-xl mx-auto">
               Have a question about Twiinn AI? Want to partner with us? Reach out and we&apos;ll get back to you quickly.
             </p>
           </div>
@@ -54,8 +51,8 @@ export default function ContactPage() {
               href="mailto:contact@twiinn.ai"
               className="card-light rounded-2xl p-6 text-center group hover:border-[#A855F7]/30"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-7 h-7 text-white" strokeWidth={1.8} />
+              <div className="w-14 h-14 rounded-2xl bg-[#7C3AED]/[0.08] flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-7 h-7 text-[#7C3AED]" strokeWidth={1.8} />
               </div>
               <h2 className="font-display font-700 text-[#0F0F23] mb-1 group-hover:text-[#A855F7] transition-colors">
                 Email
@@ -64,19 +61,19 @@ export default function ContactPage() {
             </a>
 
             <div className="card-light rounded-2xl p-6 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00D4FF] to-[#A855F7] flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-7 h-7 text-white" strokeWidth={1.8} />
+              <div className="w-14 h-14 rounded-2xl bg-[#7C3AED]/[0.08] flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-7 h-7 text-[#7C3AED]" strokeWidth={1.8} />
               </div>
               <h2 className="font-display font-700 text-[#0F0F23] mb-1">Location</h2>
-              <p className="text-[#94A3B8] text-sm">Montreal, QC, Canada</p>
+              <p className="text-[#64748B] text-sm">Montreal, QC, Canada</p>
             </div>
 
             <div className="card-light rounded-2xl p-6 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#84FF57] to-[#00D4FF] flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-7 h-7 text-white" strokeWidth={1.8} />
+              <div className="w-14 h-14 rounded-2xl bg-[#7C3AED]/[0.08] flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-7 h-7 text-[#7C3AED]" strokeWidth={1.8} />
               </div>
-              <h2 className="font-display font-700 text-[#0F0F23] mb-1">Response Time</h2>
-              <p className="text-[#94A3B8] text-sm">Within 24 hours</p>
+              <h2 className="font-display font-700 text-[#0F0F23] mb-1">Response time</h2>
+              <p className="text-[#64748B] text-sm">Within 24 hours</p>
             </div>
           </div>
 
@@ -87,9 +84,9 @@ export default function ContactPage() {
             </h2>
             <div className="space-y-4">
               {faqs.map((faq) => (
-                <div key={faq.q} className="bg-[#F8FAFC] rounded-xl p-6">
+                <div key={faq.q} className="bg-[#F7F8FB] rounded-xl p-6">
                   <p className="font-display font-600 text-[#0F0F23] mb-2">{faq.q}</p>
-                  <p className="text-sm text-[#94A3B8] leading-relaxed">{faq.a}</p>
+                  <p className="text-sm text-[#475569] leading-relaxed">{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -97,12 +94,12 @@ export default function ContactPage() {
 
           {/* CTA */}
           <div className="text-center mt-16">
-            <p className="text-[#94A3B8] mb-4">Ready to get started?</p>
+            <p className="text-[#475569] mb-4">Ready to get started?</p>
             <a
               href="/#waitlist"
               className="inline-block gradient-btn text-white font-600 px-8 py-3.5 rounded-xl"
             >
-              Join the Waitlist
+              Join the waitlist
             </a>
           </div>
         </div>

@@ -6,7 +6,7 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt="Twiinn AI" width={32} height={38} className="w-8 h-auto mb-2" />
-            <p className="text-xs text-[#94A3B8]">Your Voice. Their World. 24/7.</p>
+            <p className="text-xs text-[#94A3B8]">AI twins for creators.</p>
           </div>
 
           <nav className="flex items-center gap-6 text-sm text-[#94A3B8]" aria-label="Footer navigation">

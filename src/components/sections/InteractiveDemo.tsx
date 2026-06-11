@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, type ComponentType } from 'react';
 import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-import { Send } from 'lucide-react';
+import { Send, RotateCw } from 'lucide-react';
 import { TwinCoachMike, TwinSarahGlow, TwinAlexCapital } from '@/components/ui/Avatars';
 
 interface CreatorProfile {
@@ -26,7 +26,7 @@ const demoConversations: DemoConversation[] = [
       niche: 'Fitness',
       photo: '/influencers/coach-mike.jpg',
       TwinAvatar: TwinCoachMike,
-      tagColor: 'text-[#FF6B6B] bg-[#FF6B6B]/10',
+      tagColor: 'text-[#E11D48] bg-[#E11D48]/10',
     },
     messages: [
       {
@@ -50,7 +50,7 @@ const demoConversations: DemoConversation[] = [
       niche: 'Skincare',
       photo: '/influencers/sarah-glow.jpg',
       TwinAvatar: TwinSarahGlow,
-      tagColor: 'text-[#00D4FF] bg-[#00D4FF]/10',
+      tagColor: 'text-[#0E7490] bg-[#0E7490]/10',
     },
     messages: [
       { from: 'user', text: 'My skin gets super oily by noon even after moisturizing. Help?' },
@@ -71,7 +71,7 @@ const demoConversations: DemoConversation[] = [
       niche: 'Investing',
       photo: '/influencers/alex-capital.jpg',
       TwinAvatar: TwinAlexCapital,
-      tagColor: 'text-[#84FF57] bg-[#84FF57]/10',
+      tagColor: 'text-[#16A34A] bg-[#16A34A]/10',
     },
     messages: [
       {
@@ -95,10 +95,36 @@ export function InteractiveDemo() {
   const [activeCreator, setActiveCreator] = useState(0);
   const [visibleMessages, setVisibleMessages] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
+  const [started, setStarted] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const convo = demoConversations[activeCreator];
   const { TwinAvatar } = convo.creator;
+
+  // Autoplay only once the section is actually on screen.
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setStarted(true);
+      setVisibleMessages(demoConversations[0].messages.length);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     setVisibleMessages(0);
@@ -106,7 +132,12 @@ export function InteractiveDemo() {
   }, [activeCreator]);
 
   useEffect(() => {
-    if (visibleMessages >= convo.messages.length) return;
+    if (!started || visibleMessages >= convo.messages.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVisibleMessages(convo.messages.length);
+      return;
+    }
 
     const nextMsg = convo.messages[visibleMessages];
     const delay = nextMsg.from === 'twin' ? 1800 : 800;
@@ -125,39 +156,36 @@ export function InteractiveDemo() {
 
     const timer = setTimeout(() => setVisibleMessages((v) => v + 1), delay);
     return () => clearTimeout(timer);
-  }, [visibleMessages, convo.messages]);
+  }, [started, visibleMessages, convo.messages]);
 
   useEffect(() => {
     if (chatRef.current) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+      chatRef.current.scrollTo({ top: chatRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [visibleMessages, isTyping]);
 
   return (
-    <section className="bg-[#F8FAFC] py-24 md:py-32" id="demo" aria-label="Interactive demo">
+    <section
+      ref={sectionRef}
+      className="bg-[#F7F8FB] py-24 md:py-32"
+      id="demo"
+      aria-label="Interactive demo"
+    >
       <div className="max-w-[1200px] mx-auto px-6">
         <ScrollReveal>
-          <div className="text-center mb-12">
-            <p className="text-sm font-600 uppercase tracking-widest text-[#A855F7] mb-3">
-              Try it yourself
-            </p>
-            <h2
-              className="font-display font-800 text-[#0F0F23] tracking-tight mb-4"
-              style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)' }}
-            >
-              This is what a{' '}
-              <span className="gradient-text">Twin</span> feels like
+          <div className="text-center mb-14 md:mb-20">
+            <h2 className="text-display-lg font-display font-800 text-[#0F0F23] mb-4">
+              This is what a <span className="text-[#7C3AED]">Twin</span> feels like
             </h2>
-            <p className="text-lg text-[#94A3B8] max-w-2xl mx-auto">
-              Real conversations. Real expertise. Available 24/7. Pick a creator and watch their AI
-              twin in action.
+            <p className="text-lg text-[#475569] max-w-xl mx-auto">
+              Three sample twins, three niches. Pick one and watch it answer.
             </p>
           </div>
         </ScrollReveal>
 
         <div className="max-w-2xl mx-auto">
           {/* Creator selector */}
-          <ScrollReveal delay={100}>
+          <ScrollReveal delay={80}>
             <div className="flex gap-3 mb-5 justify-center flex-wrap" role="tablist" aria-label="Select a creator">
               {demoConversations.map((c, i) => (
                 <button
@@ -167,8 +195,8 @@ export function InteractiveDemo() {
                   onClick={() => setActiveCreator(i)}
                   className={`flex items-center gap-2.5 px-4 py-2 rounded-full border transition-all duration-200 text-sm font-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] ${
                     activeCreator === i
-                      ? 'border-[#A855F7] bg-[#A855F7]/10 text-[#A855F7] shadow-sm'
-                      : 'border-black/10 text-[#94A3B8] hover:border-[#A855F7]/30 hover:text-[#0F0F23]'
+                      ? 'border-[#7C3AED] bg-[#7C3AED]/[0.08] text-[#7C3AED] shadow-sm'
+                      : 'border-black/10 text-[#64748B] hover:border-[#7C3AED]/30 hover:text-[#0F0F23]'
                   }`}
                 >
                   <Image
@@ -184,7 +212,7 @@ export function InteractiveDemo() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={150}>
+          <ScrollReveal delay={120}>
             {/* Chat window */}
             <div className="card-light rounded-2xl overflow-hidden" role="tabpanel" aria-label={`Chat with ${convo.creator.name}`}>
               {/* Chat header */}
@@ -205,8 +233,8 @@ export function InteractiveDemo() {
                 <div className="min-w-0">
                   <p className="font-display font-700 text-[#0F0F23] text-sm">{convo.creator.name}</p>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#84FF57] animate-pulse-glow flex-shrink-0" aria-hidden="true" />
-                    <span className="text-xs text-[#94A3B8]">AI Twin &bull; Online 24/7</span>
+                    <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse-glow flex-shrink-0" aria-hidden="true" />
+                    <span className="text-xs text-[#64748B]">AI Twin &bull; Online 24/7</span>
                   </div>
                 </div>
                 <div className={`ml-auto px-3 py-1 rounded-full text-xs font-600 flex-shrink-0 ${convo.creator.tagColor}`}>
@@ -217,7 +245,7 @@ export function InteractiveDemo() {
               {/* Messages */}
               <div
                 ref={chatRef}
-                className="p-5 space-y-4 min-h-[320px] max-h-[400px] overflow-y-auto bg-gradient-to-b from-[#F8FAFC] to-white"
+                className="p-5 space-y-4 min-h-[320px] max-h-[400px] overflow-y-auto bg-gradient-to-b from-[#F7F8FB] to-white"
                 aria-live="polite"
                 aria-label="Conversation"
               >
@@ -225,7 +253,7 @@ export function InteractiveDemo() {
                   <div
                     key={`${activeCreator}-${i}`}
                     className={`flex gap-2 ${msg.from === 'user' ? 'justify-end' : ''}`}
-                    style={{ animation: 'fadeSlideIn 0.4s cubic-bezier(0.4,0,0.2,1)' }}
+                    style={{ animation: 'fadeSlideIn 0.35s var(--ease-out-expo) both' }}
                   >
                     {msg.from === 'twin' && (
                       <div className="flex-shrink-0 mt-1">
@@ -235,7 +263,7 @@ export function InteractiveDemo() {
                     <div
                       className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
                         msg.from === 'user'
-                          ? 'bg-gradient-to-r from-[#A855F7]/10 to-[#00D4FF]/10 text-[#0F0F23] rounded-tr-sm'
+                          ? 'bg-[#7C3AED]/[0.08] text-[#0F0F23] rounded-tr-sm'
                           : 'bg-white text-[#0F0F23] shadow-sm border border-black/5 rounded-tl-sm'
                       }`}
                     >
@@ -254,7 +282,7 @@ export function InteractiveDemo() {
                         {[0, 150, 300].map((d) => (
                           <span
                             key={d}
-                            className="w-2 h-2 rounded-full bg-[#94A3B8]/40 animate-bounce"
+                            className="w-2 h-2 rounded-full bg-[#94A3B8]/40 animate-typing"
                             style={{ animationDelay: `${d}ms` }}
                             aria-hidden="true"
                           />
@@ -264,16 +292,17 @@ export function InteractiveDemo() {
                   </div>
                 )}
 
-                {visibleMessages >= convo.messages.length && (
+                {started && visibleMessages >= convo.messages.length && (
                   <div className="text-center pt-4">
                     <button
                       onClick={() => {
                         setVisibleMessages(0);
                         setIsTyping(false);
                       }}
-                      className="text-sm text-[#A855F7] font-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] rounded-sm"
+                      className="inline-flex items-center gap-1.5 text-sm text-[#7C3AED] font-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] rounded-sm"
                     >
-                      &#8635; Replay conversation
+                      <RotateCw className="w-3.5 h-3.5" aria-hidden="true" />
+                      Replay conversation
                     </button>
                   </div>
                 )}
@@ -281,18 +310,18 @@ export function InteractiveDemo() {
 
               {/* Fake input */}
               <div className="px-5 py-3 border-t border-black/5 bg-white">
-                <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#F8FAFC] border border-black/5" aria-hidden="true">
-                  <span className="text-sm text-[#94A3B8]/50 flex-1">Type a message...</span>
-                  <div className="w-9 h-9 rounded-lg bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] flex items-center justify-center flex-shrink-0">
+                <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#F1F2F7] border border-black/5" aria-hidden="true">
+                  <span className="text-sm text-[#64748B]/60 flex-1">Type a message...</span>
+                  <div className="w-9 h-9 rounded-lg gradient-btn flex items-center justify-center flex-shrink-0">
                     <Send className="w-4 h-4 text-white" strokeWidth={2.5} />
                   </div>
                 </div>
               </div>
             </div>
 
-            <p className="text-center text-xs text-[#94A3B8] mt-4">
-              Example of how AI twins respond. Powered by advanced language models trained on
-              creator content.
+            <p className="text-center text-xs text-[#64748B] mt-4">
+              Scripted demo for illustration — Coach Mike, Sarah Glow, and Alex Capital are sample
+              personas.
             </p>
           </ScrollReveal>
         </div>

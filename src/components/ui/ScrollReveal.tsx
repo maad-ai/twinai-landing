@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, ReactNode } from 'react';
+import { useEffect, useRef, ReactNode, CSSProperties } from 'react';
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -9,6 +9,10 @@ interface ScrollRevealProps {
   threshold?: number;
 }
 
+/**
+ * Reveal-on-scroll. The hidden state lives in CSS ([data-reveal] in globals.css)
+ * so server-rendered HTML never flashes visible-then-hidden during hydration.
+ */
 export function ScrollReveal({
   children,
   className = '',
@@ -21,20 +25,11 @@ export function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
-    // Respect reduced motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(28px)';
-    el.style.transition = `opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms`;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
+            el.classList.add('is-visible');
             observer.unobserve(el);
           }
         });
@@ -44,10 +39,15 @@ export function ScrollReveal({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay, threshold]);
+  }, [threshold]);
 
   return (
-    <div ref={ref} className={className}>
+    <div
+      ref={ref}
+      data-reveal
+      className={className}
+      style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}
+    >
       {children}
     </div>
   );

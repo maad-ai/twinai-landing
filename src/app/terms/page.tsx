@@ -32,7 +32,7 @@ export default function TermsPage() {
             <section>
               <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">2. Description of Service</h2>
               <p>
-                Twiinn AI is a platform that allows creators to build AI-powered chatbots trained on their content. Fans can subscribe monthly to interact with these AI twins. Creators retain 85-90% of subscription revenue.
+                Twiinn AI is a platform that allows creators to build AI-powered chatbots trained on their content. Fans can subscribe monthly to interact with these AI twins. Creators retain 85% of subscription revenue.
               </p>
             </section>
 

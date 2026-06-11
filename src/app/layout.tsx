@@ -6,14 +6,14 @@ import './globals.css';
 const jakarta = Plus_Jakarta_Sans({
   variable: '--font-jakarta',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['600', '700', '800'],
   display: 'swap',
 });
 
 const outfit = Outfit({
   variable: '--font-outfit',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['400', '500', '600'],
   display: 'swap',
 });
 
@@ -26,11 +26,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://twiinn.ai'),
   title: {
-    default: 'Twiinn AI — Your Voice. Their World. 24/7.',
+    default: 'Twiinn AI — Let fans talk to your AI twin',
     template: '%s | Twiinn AI',
   },
   description:
-    'Create an AI twin of yourself. Let your audience connect with you even when you\'re offline. Fans subscribe monthly — you keep 85–90% and earn 24/7.',
+    'Create an AI twin of yourself. Let your audience connect with you even when you\'re offline. Fans subscribe monthly — you keep 85% and earn 24/7.',
   keywords: [
     'AI clone',
     'creator monetization',
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://twiinn.ai',
     siteName: 'Twiinn AI',
-    title: 'Twiinn AI — Your fans can talk to your AI clone.',
+    title: 'Twiinn AI — Your fans can talk to your AI twin.',
     description:
-      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85–90% and earn 24/7.',
+      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85% and earn 24/7.',
     images: [
       {
         url: '/og-image.png',
@@ -72,9 +72,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Twiinn AI — Your fans can talk to your AI clone.',
+    title: 'Twiinn AI — Your fans can talk to your AI twin.',
     description:
-      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85–90%.',
+      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85%.',
     images: ['/og-image.png'],
     creator: '@twiinnai',
   },

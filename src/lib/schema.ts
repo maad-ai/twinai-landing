@@ -55,7 +55,7 @@ export function getFAQSchema() {
         name: 'How much can I earn with Twiinn AI?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'A creator with 50K followers charging $14.99/month could realistically earn $2,000–5,000/month. Creators with 500K+ followers can earn $10K–30K/month.',
+          text: 'Your earnings = subscribers × your price × 85%. If 1% of a 50K audience subscribes at $14.99/month, that is about $6,400/month to you. It scales with audience size and engagement.',
         },
       },
       {
@@ -71,7 +71,7 @@ export function getFAQSchema() {
         name: 'What is the Twiinn AI commission structure?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'We take a 10–15% platform fee. You keep 85–90% of every subscription. Early creators who join the waitlist get 0% commission for the first 6 months.',
+          text: 'We take a flat 15% platform fee — you keep 85% of every subscription and message credit. Founding creators pay 0% for their first 6 months.',
         },
       },
       {
@@ -79,7 +79,7 @@ export function getFAQSchema() {
         name: 'When does Twiinn AI launch?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'We are building the MVP now. Join the waitlist to be among the first creators when we launch.',
+          text: 'We are onboarding our first creators now. Waitlist members get access in signup order — creators first, then fans.',
         },
       },
     ],
