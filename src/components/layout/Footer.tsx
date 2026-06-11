@@ -10,6 +10,9 @@ export function Footer() {
           </div>
 
           <nav className="flex items-center gap-6 text-sm text-[#94A3B8]" aria-label="Footer navigation">
+            <a href="/blog" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm">
+              Blog
+            </a>
             <a href="/privacy" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm">
               Privacy
             </a>

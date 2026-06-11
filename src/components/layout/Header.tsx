@@ -26,6 +26,7 @@ export function Header() {
     { href: '/#how', label: 'How it works' },
     { href: '/#creators', label: 'For Creators' },
     { href: '/#pricing', label: 'Pricing' },
+    { href: '/blog', label: 'Blog' },
   ];
 
   return (
