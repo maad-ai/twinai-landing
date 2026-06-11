@@ -32,8 +32,8 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b transition-[background-color,border-color] duration-300 ${
         scrolled
-          ? 'bg-[#0F0F23]/85 border-white/8'
-          : 'bg-[#0F0F23]/0 border-transparent'
+          ? 'bg-white/85 border-black/[0.06]'
+          : 'bg-white/0 border-transparent'
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
@@ -53,7 +53,7 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-[#94A3B8] hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm"
+              className="text-[#475569] font-500 hover:text-[#0F0F23] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm"
             >
               {link.label}
             </a>
@@ -71,23 +71,23 @@ export function Header() {
 
           {/* Hamburger — mobile only */}
           <button
-            className="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-lg hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+            className="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-lg hover:bg-black/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-5 h-0.5 bg-white rounded-full transition-all duration-300 origin-center ${
+              className={`block w-5 h-0.5 bg-[#0F0F23] rounded-full transition-all duration-300 origin-center ${
                 menuOpen ? 'rotate-45 translate-y-2' : ''
               }`}
             />
             <span
-              className={`block w-5 h-0.5 bg-white rounded-full transition-all duration-300 ${
+              className={`block w-5 h-0.5 bg-[#0F0F23] rounded-full transition-all duration-300 ${
                 menuOpen ? 'opacity-0 scale-x-0' : ''
               }`}
             />
             <span
-              className={`block w-5 h-0.5 bg-white rounded-full transition-all duration-300 origin-center ${
+              className={`block w-5 h-0.5 bg-[#0F0F23] rounded-full transition-all duration-300 origin-center ${
                 menuOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
             />
@@ -103,7 +103,7 @@ export function Header() {
         aria-hidden={!menuOpen}
       >
         <nav
-          className="backdrop-blur-xl bg-[#0F0F23]/95 border-t border-white/8 px-6 py-4 space-y-1"
+          className="backdrop-blur-xl bg-white/95 border-t border-black/[0.06] px-6 py-4 space-y-1"
           aria-label="Mobile navigation"
         >
           {navLinks.map((link) => (
@@ -111,7 +111,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="block py-3 text-[#94A3B8] hover:text-white transition-colors duration-200 text-sm font-500 border-b border-white/5 last:border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm"
+              className="block py-3 text-[#475569] hover:text-[#0F0F23] transition-colors duration-200 text-sm font-500 border-b border-black/5 last:border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 rounded-sm"
             >
               {link.label}
             </a>

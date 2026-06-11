@@ -36,7 +36,7 @@ export function FAQ() {
   const toggle = (i: number) => setOpen(open === i ? null : i);
 
   return (
-    <section className="bg-[#F7F8FB] py-20 md:py-24" aria-label="Frequently Asked Questions">
+    <section className="bg-white py-20 md:py-24" aria-label="Frequently Asked Questions">
       <div className="max-w-3xl mx-auto px-6">
         <ScrollReveal>
           <h2 className="text-display-lg font-display font-800 text-[#0F0F23] text-center mb-12">

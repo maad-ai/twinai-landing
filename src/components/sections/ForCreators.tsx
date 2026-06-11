@@ -19,40 +19,39 @@ const stats = [
 
 export function ForCreators() {
   return (
-    <section
-      id="creators"
-      className="section-dark grain relative py-24 md:py-32 border-t border-white/[0.06]"
-      aria-label="For Creators"
-    >
+    <section id="creators" className="bg-white py-24 md:py-32" aria-label="For Creators">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left: copy */}
           <ScrollReveal>
             <div>
-              <p className="eyebrow text-[#A855F7] mb-3">For Creators</p>
-              <h2 className="text-display-lg font-display font-800 text-white mb-6">
+              <p className="eyebrow text-[#7C3AED] mb-3">For Creators</p>
+              <h2 className="text-display-lg font-display font-800 text-[#0F0F23] mb-6">
                 Your audience wants more of you. Give them your twin.
               </h2>
               <ul className="space-y-5" aria-label="Creator benefits">
                 {benefits.map((item, i) => (
                   <li key={i} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#A855F7]/10">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#7C3AED]/[0.08]">
                       <item.icon
-                        className="w-5 h-5 text-[#A855F7]"
+                        className="w-5 h-5 text-[#7C3AED]"
                         strokeWidth={1.8}
                         aria-hidden="true"
                       />
                     </div>
-                    <span className="text-lg text-[#94A3B8] leading-relaxed">{item.text}</span>
+                    <span className="text-[17px] text-[#475569] leading-relaxed">{item.text}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </ScrollReveal>
 
-          {/* Right: fake dashboard */}
+          {/* Right: dashboard mock — dark panel, real-product look */}
           <ScrollReveal delay={120}>
-            <div className="card-glass rounded-2xl p-5 sm:p-8">
+            <div
+              className="rounded-2xl p-5 sm:p-8 bg-[#0F0F23] border border-black/10"
+              style={{ boxShadow: 'var(--shadow-lg)' }}
+            >
               <p className="eyebrow text-[#94A3B8] mb-4">Example creator dashboard</p>
 
               {/* Creator info — photo + twin */}

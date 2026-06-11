@@ -167,7 +167,7 @@ export function InteractiveDemo() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#F7F8FB] py-24 md:py-32"
+      className="bg-white py-24 md:py-32"
       id="demo"
       aria-label="Interactive demo"
     >

@@ -21,7 +21,7 @@ const benefits = [
 
 export function ForFans() {
   return (
-    <section id="fans" className="bg-[#F7F8FB] py-20 md:py-24" aria-label="For Fans">
+    <section id="fans" className="bg-white py-20 md:py-24" aria-label="For Fans">
       <div className="max-w-[1200px] mx-auto px-6 text-center">
         <ScrollReveal>
           <p className="eyebrow text-[#7C3AED] mb-3">For Fans</p>

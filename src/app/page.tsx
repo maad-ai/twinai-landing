@@ -1,7 +1,7 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
-import { Explainer } from '@/components/sections/Explainer';
+import { TheShift } from '@/components/sections/TheShift';
 import { InteractiveDemo } from '@/components/sections/InteractiveDemo';
 import { HowItWorks } from '@/components/sections/HowItWorks';
 import { ForCreators } from '@/components/sections/ForCreators';
@@ -41,12 +41,12 @@ export default function Home() {
 
       <main id="main-content">
         <Hero />
-        <Explainer />
+        <TheShift />
         <InteractiveDemo />
         <HowItWorks />
         <ForCreators />
-        <ForFans />
         <Pricing />
+        <ForFans />
         <Waitlist />
         <FAQ />
         <FinalCTA />

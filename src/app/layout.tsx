@@ -20,7 +20,7 @@ const outfit = Outfit({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0F0F23',
+  themeColor: '#FFFFFF',
 };
 
 export const metadata: Metadata = {
@@ -93,7 +93,7 @@ export default function RootLayout({
       lang="en"
       className={`${jakarta.variable} ${outfit.variable} antialiased`}
     >
-      <body className="min-h-screen bg-[#0F0F23]">
+      <body className="min-h-screen bg-white text-[#0F0F23]">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-[#A855F7] focus:text-white focus:font-600 focus:text-sm"
