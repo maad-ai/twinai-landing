@@ -95,7 +95,7 @@ function PhoneMockup() {
             </div>
 
             {/* Messages — light, iMessage-clean */}
-            <div className="px-4 py-4 space-y-3 min-h-[300px] bg-[#F7F8FB]">
+            <div className="px-4 py-4 space-y-3 min-h-[390px] bg-[#F7F8FB]">
               <div className="flex gap-2">
                 <div className="flex-shrink-0 mt-0.5">
                   <TwinCoachMike size={24} />
