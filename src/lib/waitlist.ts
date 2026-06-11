@@ -16,16 +16,25 @@ export interface Signup {
   ref?: string;
 }
 
+/* Accepts both naming schemes: UPSTASH_* (direct Upstash) and KV_* (Vercel
+   Storage / marketplace integration). */
+function redisCreds() {
+  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+  return url && token ? { url, token } : null;
+}
+
 function hasRedis() {
-  return Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
+  return redisCreds() !== null;
 }
 
 async function redis<T = unknown>(command: (string | number)[]): Promise<T | null> {
-  if (!hasRedis()) return null;
-  const res = await fetch(process.env.UPSTASH_REDIS_REST_URL as string, {
+  const creds = redisCreds();
+  if (!creds) return null;
+  const res = await fetch(creds.url, {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${process.env.UPSTASH_REDIS_REST_TOKEN}`,
+      Authorization: `Bearer ${creds.token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(command),
