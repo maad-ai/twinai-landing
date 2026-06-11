@@ -94,3 +94,29 @@ export async function getWaitlistStats(): Promise<{ creators: number; total: num
     return null;
   }
 }
+
+/**
+ * Diagnostics for the health endpoint — never leaks secret values, only
+ * whether creds exist, the URL scheme, and the error class if any.
+ */
+export async function diagnoseRedis(): Promise<{
+  creds: boolean;
+  urlScheme: string | null;
+  ok: boolean;
+  error: string | null;
+}> {
+  const creds = redisCreds();
+  if (!creds) return { creds: false, urlScheme: null, ok: false, error: 'no-credentials' };
+  const urlScheme = creds.url.split(':')[0];
+  try {
+    await redis(['PING']);
+    return { creds: true, urlScheme, ok: true, error: null };
+  } catch (e) {
+    return {
+      creds: true,
+      urlScheme,
+      ok: false,
+      error: e instanceof Error ? e.message : 'unknown',
+    };
+  }
+}

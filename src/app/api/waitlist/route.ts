@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { saveSignup, getWaitlistStats } from '@/lib/waitlist';
+import { saveSignup, getWaitlistStats, diagnoseRedis } from '@/lib/waitlist';
 
 export const dynamic = 'force-dynamic';
 
@@ -7,11 +7,13 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /** Health/stats: confirms whether Redis persistence is live (no email side effects). */
 export async function GET() {
-  const stats = await getWaitlistStats();
+  const diag = await diagnoseRedis();
+  const stats = diag.ok ? await getWaitlistStats() : null;
   return Response.json({
-    persistence: stats !== null,
+    persistence: diag.ok,
     creators: stats?.creators ?? null,
     total: stats?.total ?? null,
+    diag,
   });
 }
 
