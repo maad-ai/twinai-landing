@@ -1,37 +1,6 @@
 import Image from 'next/image';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
-const proofs = [
-  {
-    photo: null,
-    initials: 'CM',
-    name: 'Caryn Marjorie',
-    tag: 'Snapchat creator — launched CarynAI',
-    quote:
-      '“Whether you need somebody to be comforting or loving… CarynAI will always be there for you.”',
-    fact: 'Her AI made $71,610 in its first week.',
-    source: 'Fortune, 2023',
-  },
-  {
-    photo: '/creators/amouranth.jpg',
-    initials: 'AM',
-    name: 'Amouranth',
-    tag: 'Top Twitch streamer — launched AI Amouranth',
-    quote: '“I thrive on taking risks and pushing boundaries.”',
-    fact: 'Her AI made $34,000 in its first 24 hours.',
-    source: 'Decrypt / NetInfluencer, 2023',
-  },
-  {
-    photo: '/creators/grimes.png',
-    initials: 'G',
-    name: 'Grimes',
-    tag: 'Musician — opened her AI voice to fans',
-    quote: '“I’ll split 50% royalties on any successful AI generated song that uses my voice.”',
-    fact: 'Invited fans to create — and earn — with her AI.',
-    source: 'Rolling Stone, 2023',
-  },
-];
-
 export function TheShift() {
   return (
     <section className="bg-[#F7F8FB] py-20 md:py-24" aria-label="The shift is happening">
@@ -46,40 +15,95 @@ export function TheShift() {
         </ScrollReveal>
 
         <ScrollReveal delay={80}>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {proofs.map((p) => (
-              <article key={p.name} className="card-light rounded-2xl p-6 h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-4">
-                  {p.photo ? (
-                    <Image
-                      src={p.photo}
-                      alt={p.name}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover flex-shrink-0"
-                    />
-                  ) : (
-                    <div
-                      className="w-12 h-12 rounded-full bg-[#7C3AED]/[0.08] flex items-center justify-center font-display font-700 text-sm text-[#7C3AED] flex-shrink-0"
-                      aria-hidden="true"
-                    >
-                      {p.initials}
-                    </div>
-                  )}
-                  <div>
-                    <p className="font-display font-700 text-[#0F0F23] text-sm leading-tight">
-                      {p.name}
-                    </p>
-                    <p className="text-xs text-[#64748B] leading-snug">{p.tag}</p>
-                  </div>
-                </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+            {/* Amouranth — big photo card */}
+            <article className="card-light rounded-3xl overflow-hidden h-full flex flex-col">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/creators/amouranth.jpg"
+                  alt="Amouranth"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-1">
+                <p className="font-display font-700 text-lg text-[#0F0F23] leading-tight">
+                  Amouranth
+                </p>
+                <p className="text-xs text-[#64748B] mb-3">
+                  Top Twitch streamer — launched AI Amouranth
+                </p>
                 <blockquote className="text-[15px] text-[#475569] leading-[1.65] flex-1">
-                  {p.quote}
+                  “I thrive on taking risks and pushing boundaries.”
                 </blockquote>
-                <p className="text-sm font-600 text-[#16A34A] mt-4">{p.fact}</p>
-                <p className="text-xs text-[#94A3B8] mt-1">{p.source}</p>
-              </article>
-            ))}
+                <p className="text-sm font-600 text-[#16A34A] mt-4">
+                  Her AI made $34,000 in its first 24 hours.
+                </p>
+                <p className="text-xs text-[#94A3B8] mt-1">Decrypt / NetInfluencer, 2023</p>
+              </div>
+            </article>
+
+            {/* Caryn Marjorie — big stat card (no freely-licensed photo exists) */}
+            <article
+              className="rounded-3xl overflow-hidden h-full flex flex-col text-white"
+              style={{
+                background:
+                  'radial-gradient(120% 100% at 50% 0%, #2A1B4D 0%, #0F0F23 70%)',
+                boxShadow: 'var(--shadow-md)',
+              }}
+            >
+              <div className="p-6 pt-10 text-center">
+                <p className="eyebrow text-[#A855F7]">CarynAI — first week</p>
+                <p
+                  className="font-display font-800 text-white my-4"
+                  style={{ fontSize: 'clamp(2.5rem, 4vw, 3.25rem)', lineHeight: 1 }}
+                >
+                  $71,610
+                </p>
+                <p className="text-xs text-[#94A3B8] uppercase tracking-[0.1em]">
+                  in 7 days of beta
+                </p>
+              </div>
+              <div className="p-6 pt-2 flex flex-col flex-1 border-t border-white/[0.08] mt-4">
+                <p className="font-display font-700 text-lg leading-tight mt-4">Caryn Marjorie</p>
+                <p className="text-xs text-[#94A3B8] mb-3">
+                  Snapchat creator — launched CarynAI
+                </p>
+                <blockquote className="text-[15px] text-[#CBD5E1] leading-[1.65] flex-1">
+                  “Whether you need somebody to be comforting or loving… CarynAI will always be
+                  there for you.”
+                </blockquote>
+                <p className="text-xs text-[#94A3B8] mt-4">Fortune, 2023</p>
+              </div>
+            </article>
+
+            {/* Grimes — big photo card */}
+            <article className="card-light rounded-3xl overflow-hidden h-full flex flex-col">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/creators/grimes.png"
+                  alt="Grimes"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-1">
+                <p className="font-display font-700 text-lg text-[#0F0F23] leading-tight">Grimes</p>
+                <p className="text-xs text-[#64748B] mb-3">
+                  Musician — opened her AI voice to fans
+                </p>
+                <blockquote className="text-[15px] text-[#475569] leading-[1.65] flex-1">
+                  “I’ll split 50% royalties on any successful AI generated song that uses my
+                  voice.”
+                </blockquote>
+                <p className="text-sm font-600 text-[#16A34A] mt-4">
+                  Invited fans to create — and earn — with her AI.
+                </p>
+                <p className="text-xs text-[#94A3B8] mt-1">Rolling Stone, 2023</p>
+              </div>
+            </article>
           </div>
         </ScrollReveal>
 

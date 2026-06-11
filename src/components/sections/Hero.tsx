@@ -137,21 +137,22 @@ function PhoneMockup() {
         </div>
       </div>
 
-      {/* Floating callouts — what fans LEARN from the chat (Cal AI-style chips) */}
+      {/* Floating callouts — what fans LEARN from the chat (Cal AI-style chips),
+          fully OUTSIDE the phone so the conversation stays readable */}
       <div
-        className="absolute -right-8 sm:-right-20 top-[150px] hidden sm:flex flex-col items-start gap-2"
+        className="absolute left-full ml-4 top-[170px] hidden md:flex flex-col items-start gap-2 w-max"
         aria-hidden="true"
       >
-        <p className="text-[11px] font-600 uppercase tracking-[0.1em] text-[#64748B] pl-1">
+        <p className="text-[10px] font-600 uppercase tracking-[0.1em] text-[#64748B] pl-1">
           What fans learn
         </p>
-        {learnings.map((l) => (
+        {learnings.map((l, i) => (
           <div
             key={l}
-            className="flex items-center gap-1.5 bg-white rounded-full pl-2.5 pr-3.5 py-1.5 border border-black/[0.06] text-[13px] font-500 text-[#0F0F23]"
-            style={{ boxShadow: 'var(--shadow-md)' }}
+            className="flex items-center gap-1.5 bg-white rounded-full pl-2.5 pr-3 py-1 border border-black/[0.06] text-[12px] font-500 text-[#0F0F23]"
+            style={{ boxShadow: 'var(--shadow-md)', marginLeft: `${[0, 14, 6][i]}px` }}
           >
-            <Check className="w-3.5 h-3.5 text-[#16A34A]" strokeWidth={2.5} />
+            <Check className="w-3 h-3 text-[#16A34A]" strokeWidth={2.5} />
             {l}
           </div>
         ))}
@@ -159,12 +160,12 @@ function PhoneMockup() {
 
       {/* Earnings chip */}
       <div
-        className="absolute -left-6 sm:-left-16 bottom-20 bg-white rounded-2xl px-4 py-3 border border-black/[0.06]"
+        className="absolute -left-4 sm:-left-12 bottom-24 bg-white rounded-2xl px-3.5 py-2.5 border border-black/[0.06]"
         style={{ boxShadow: 'var(--shadow-md)' }}
       >
-        <p className="text-[11px] text-[#64748B] uppercase tracking-[0.08em]">This month</p>
-        <p className="font-display font-800 text-xl text-[#0F0F23]">$4,200</p>
-        <p className="text-[11px] text-[#16A34A] font-600">Example earnings</p>
+        <p className="text-[10px] text-[#64748B] uppercase tracking-[0.08em]">This month</p>
+        <p className="font-display font-800 text-lg text-[#0F0F23] leading-tight">$4,200</p>
+        <p className="text-[10px] text-[#16A34A] font-600">Example earnings</p>
       </div>
     </div>
   );
@@ -259,8 +260,8 @@ export function Hero() {
             </Enter>
           </div>
 
-          {/* Right: the product */}
-          <div className="mt-6 lg:mt-0 flex justify-center lg:justify-end lg:pr-16">
+          {/* Right: the product (right padding reserves room for the callout chips) */}
+          <div className="mt-6 lg:mt-0 flex justify-center lg:justify-end lg:pr-44 xl:pr-48">
             <Enter delay={350}>
               <PhoneMockup />
             </Enter>

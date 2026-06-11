@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { StoreBadges } from '@/components/ui/StoreBadges';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -61,8 +62,11 @@ export function Header() {
           ))}
         </nav>
 
-        {/* CTA + hamburger */}
+        {/* Store badges + CTA + hamburger */}
         <div className="flex items-center gap-3">
+          <div className="hidden xl:block">
+            <StoreBadges size="sm" />
+          </div>
           <a
             href="/#waitlist"
             className="gradient-btn text-white text-sm font-600 px-5 py-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
