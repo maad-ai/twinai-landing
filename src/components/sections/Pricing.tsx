@@ -1,12 +1,29 @@
+'use client';
+
+import { useState } from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
-const tiers = [
-  { price: '$9.99', earn: '~$8.50/sub', tag: 'Casual' },
-  { price: '$19.99', earn: '~$17.00/sub', tag: 'Standard' },
-  { price: '$49.99', earn: '~$42.50/sub', tag: 'Premium' },
+const quickPicks = [
+  { label: 'Casual', price: 9.99 },
+  { label: 'Standard', price: 19.99 },
+  { label: 'Premium', price: 49.99 },
 ];
 
+const subOptions = [100, 250, 500, 1000, 2500];
+
+const money = (n: number, decimals = 0) =>
+  n.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
 export function Pricing() {
+  const [price, setPrice] = useState(19.99);
+  const [subs, setSubs] = useState(250);
+
+  const perSub = price * 0.85;
+  const monthly = perSub * subs;
+
   return (
     <section id="pricing" className="bg-[#F7F8FB] py-24 md:py-32" aria-label="Pricing">
       <div className="max-w-[1200px] mx-auto px-6 text-center">
@@ -15,34 +32,113 @@ export function Pricing() {
           <h2 className="text-display-lg font-display font-800 text-[#0F0F23] mb-6">
             You set the price. You keep 85%.
           </h2>
-          <p className="text-lg text-[#475569] max-w-xl mx-auto mb-4">
-            Fans subscribe monthly to chat with your AI twin. Choose any price point. We handle
-            payments, hosting, and AI — you just earn.
+          <p className="text-lg text-[#475569] max-w-xl mx-auto mb-12">
+            Any price you want — $5 or $100/month, it&apos;s your call. We handle payments,
+            hosting, and AI. Drag the slider and see what your twin could earn.
           </p>
-          <p className="eyebrow text-[#94A3B8] mb-12">Example price points</p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto px-2">
-          {tiers.map((tier, i) => (
-            <ScrollReveal key={tier.tag} delay={i * 80}>
-              <article className="card-light rounded-2xl p-6 h-full flex flex-col justify-between">
-                <p className="text-sm text-[#64748B] mb-1">{tier.tag}</p>
-                <p className="font-display font-800 text-3xl text-[#0F0F23] mb-1">{tier.price}</p>
-                <p className="text-sm text-[#64748B] mb-1">/month per subscriber</p>
-                <p className="text-sm font-600 text-[#16A34A]">
-                  You earn {tier.earn}
-                </p>
-              </article>
-            </ScrollReveal>
-          ))}
-        </div>
+        <ScrollReveal delay={80}>
+          <div
+            className="card-light rounded-3xl p-8 sm:p-10 max-w-2xl mx-auto text-left"
+            style={{ boxShadow: 'var(--shadow-md)' }}
+          >
+            {/* Price slider */}
+            <div className="flex items-end justify-between mb-2">
+              <label htmlFor="price-slider" className="text-sm font-600 text-[#0F0F23]">
+                Your monthly price
+              </label>
+              <p className="font-display font-800 text-3xl text-[#0F0F23] leading-none">
+                ${price.toFixed(2)}
+                <span className="text-sm font-500 text-[#64748B]">/mo</span>
+              </p>
+            </div>
+            <input
+              id="price-slider"
+              type="range"
+              min={4.99}
+              max={99.99}
+              step={5}
+              value={price}
+              onChange={(e) => setPrice(parseFloat(e.target.value))}
+              className="w-full h-2 rounded-full appearance-none cursor-pointer bg-black/[0.08] accent-[#7C3AED]"
+              aria-valuetext={`$${price.toFixed(2)} per month`}
+            />
+            <div className="flex justify-between text-xs text-[#94A3B8] mt-1.5 mb-5">
+              <span>$4.99</span>
+              <span>$99.99</span>
+            </div>
 
-        <ScrollReveal delay={200}>
+            {/* Quick picks */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {quickPicks.map((q) => (
+                <button
+                  key={q.label}
+                  onClick={() => setPrice(q.price)}
+                  className={`text-sm font-600 px-4 py-2 rounded-full border transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] ${
+                    price === q.price
+                      ? 'bg-[#7C3AED] border-[#7C3AED] text-white'
+                      : 'bg-white border-black/10 text-[#475569] hover:border-[#7C3AED]/40'
+                  }`}
+                >
+                  {q.label} ${q.price}
+                </button>
+              ))}
+            </div>
+
+            {/* Subscriber count */}
+            <p className="text-sm font-600 text-[#0F0F23] mb-2.5">Subscribers</p>
+            <div className="flex flex-wrap gap-2 mb-8">
+              {subOptions.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setSubs(s)}
+                  className={`text-sm font-600 px-4 py-2 rounded-full border transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#A855F7] ${
+                    subs === s
+                      ? 'bg-[#0F0F23] border-[#0F0F23] text-white'
+                      : 'bg-white border-black/10 text-[#475569] hover:border-black/30'
+                  }`}
+                >
+                  {money(s)}
+                </button>
+              ))}
+            </div>
+
+            {/* Result */}
+            <div className="rounded-2xl bg-[#F7F8FB] border border-black/[0.05] px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-0">
+              <div className="flex-1">
+                <p className="text-xs text-[#64748B] uppercase tracking-[0.08em] mb-1">
+                  You keep per subscriber
+                </p>
+                <p className="font-display font-700 text-xl text-[#0F0F23]">
+                  ${perSub.toFixed(2)}
+                  <span className="text-sm font-500 text-[#64748B]"> /mo</span>
+                </p>
+              </div>
+              <div className="hidden sm:block w-px h-10 bg-black/[0.08]" aria-hidden="true" />
+              <div className="flex-1 sm:pl-6">
+                <p className="text-xs text-[#64748B] uppercase tracking-[0.08em] mb-1">
+                  Your estimated monthly revenue
+                </p>
+                <p className="font-display font-800 text-3xl text-[#16A34A] leading-none">
+                  ${money(monthly)}
+                  <span className="text-sm font-600 text-[#16A34A]/70"> /mo</span>
+                </p>
+              </div>
+            </div>
+            <p className="text-xs text-[#94A3B8] mt-4 text-center">
+              Estimate: price × subscribers × 85%. Actual results depend on your audience.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={140}>
           <p className="text-sm text-[#475569] mt-10 max-w-lg mx-auto">
             Founding creators pay{' '}
             <span className="text-[#0F0F23] font-600">
-              0% platform fees for their first 6 months.
-            </span>
+              0% platform fees for their first 6 months
+            </span>{' '}
+            — they keep 100%.
           </p>
         </ScrollReveal>
       </div>
