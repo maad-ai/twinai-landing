@@ -1,9 +1,19 @@
 import { Resend } from 'resend';
-import { saveSignup } from '@/lib/waitlist';
+import { saveSignup, getWaitlistStats } from '@/lib/waitlist';
 
 export const dynamic = 'force-dynamic';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Health/stats: confirms whether Redis persistence is live (no email side effects). */
+export async function GET() {
+  const stats = await getWaitlistStats();
+  return Response.json({
+    persistence: stats !== null,
+    creators: stats?.creators ?? null,
+    total: stats?.total ?? null,
+  });
+}
 
 export async function POST(request: Request) {
   try {
@@ -19,16 +29,19 @@ export async function POST(request: Request) {
 
     // Persist first so a signup is never lost to an email hiccup.
     let creatorPosition: number | null = null;
+    let skipNotification = false;
     try {
       const result = await saveSignup({ type, email, name, handle, followers, niche, ref });
       creatorPosition = result.creatorPosition;
+      // Duplicate signup (already stored) — don't re-notify the owner.
+      skipNotification = result.stored && !result.isNew;
     } catch (dbErr) {
       console.error('Waitlist persistence failed:', dbErr);
     }
 
     // Try to send email notification (non-blocking — don't fail if email fails)
     const apiKey = process.env.RESEND_API_KEY;
-    if (apiKey) {
+    if (apiKey && !skipNotification) {
       try {
         const resend = new Resend(apiKey);
         const isCreator = type === 'creator';
