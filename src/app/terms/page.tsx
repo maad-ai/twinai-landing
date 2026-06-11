@@ -53,7 +53,7 @@ export default function TermsPage() {
             <section>
               <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">5. Payments and Commission</h2>
               <p>
-                Twiinn AI retains a 10-15% commission on all subscriptions. Early creators may qualify for promotional rates. Payouts are processed monthly to your connected payment account.
+                Twiinn AI retains a flat 15% platform fee on all subscriptions — you keep 85%. Founding creators pay 0% for their first 6 months. Payouts are processed monthly to your connected payment account.
               </p>
             </section>
 
@@ -68,8 +68,8 @@ export default function TermsPage() {
               <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">7. Contact</h2>
               <p>
                 For any questions about these Terms, please contact us at{' '}
-                <a href="mailto:contact@maad-ai.com" className="text-[#A855F7] hover:underline">
-                  contact@maad-ai.com
+                <a href="mailto:contact@twiinn.ai" className="text-[#A855F7] hover:underline">
+                  contact@twiinn.ai
                 </a>.
               </p>
             </section>

@@ -1,27 +1,69 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { track } from '@vercel/analytics';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-import { Mic, MessagesSquare, Check, Loader2, ArrowRight } from 'lucide-react';
+import { Mic, MessagesSquare, Check, Loader2, ArrowRight, Copy } from 'lucide-react';
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const inputClass =
   'w-full px-4 py-3 rounded-xl bg-[#F1F2F7] border border-black/[0.06] text-[#0F0F23] placeholder:text-[#64748B]/60 focus:outline-none focus:border-[#A855F7]/40 focus:bg-white transition-all';
+const inputErrClass =
+  'w-full px-4 py-3 rounded-xl bg-[#F1F2F7] border border-red-400 text-[#0F0F23] placeholder:text-[#64748B]/60 focus:outline-none focus:border-red-500 transition-all';
+
+const SHARE_TEXT =
+  'Creators can now clone themselves with AI and get paid 24/7. Your favorite creator should be on this 👀';
+const SHARE_URL = 'https://twiinn.ai';
 
 export function Waitlist() {
   const [creatorStatus, setCreatorStatus] = useState<FormStatus>('idle');
   const [fanStatus, setFanStatus] = useState<FormStatus>('idle');
+  const [creatorErrors, setCreatorErrors] = useState<{ name?: string; email?: string }>({});
+  const [fanError, setFanError] = useState<string | null>(null);
+  const [creatorPos, setCreatorPos] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const creatorStarted = useRef(false);
+  const fanStarted = useRef(false);
+
+  function startCreator() {
+    if (!creatorStarted.current) {
+      creatorStarted.current = true;
+      track('waitlist_form_start', { type: 'creator' });
+    }
+  }
+  function startFan() {
+    if (!fanStarted.current) {
+      fanStarted.current = true;
+      track('waitlist_form_start', { type: 'fan' });
+    }
+  }
 
   async function handleCreatorSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setCreatorStatus('loading');
-
     const form = e.currentTarget;
+    const name = (form.elements.namedItem('creator-name') as HTMLInputElement).value.trim();
+    const email = (form.elements.namedItem('creator-email') as HTMLInputElement).value.trim();
+
+    const errs: { name?: string; email?: string } = {};
+    if (!name) errs.name = 'Please enter your name.';
+    if (!EMAIL_RE.test(email)) errs.email = 'Enter a valid email, e.g. you@gmail.com';
+    if (errs.name || errs.email) {
+      setCreatorErrors(errs);
+      (form.elements.namedItem(errs.name ? 'creator-name' : 'creator-email') as HTMLInputElement).focus();
+      return;
+    }
+    setCreatorErrors({});
+    setCreatorStatus('loading');
+    track('waitlist_submit', { type: 'creator' });
+
     const data = {
       type: 'creator',
-      name: (form.elements.namedItem('creator-name') as HTMLInputElement).value,
-      email: (form.elements.namedItem('creator-email') as HTMLInputElement).value,
+      name,
+      email,
       handle: (form.elements.namedItem('creator-handle') as HTMLInputElement).value,
       followers: (form.elements.namedItem('creator-followers') as HTMLInputElement).value,
       niche: (form.elements.namedItem('creator-niche') as HTMLSelectElement).value,
@@ -33,41 +75,61 @@ export function Waitlist() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-
       if (res.ok) {
+        const json = await res.json().catch(() => ({}));
+        setCreatorPos(typeof json.creatorPosition === 'number' ? json.creatorPosition : null);
         setCreatorStatus('success');
+        track('waitlist_success', { type: 'creator' });
       } else {
         setCreatorStatus('error');
+        track('waitlist_error', { type: 'creator' });
       }
     } catch {
       setCreatorStatus('error');
+      track('waitlist_error', { type: 'creator' });
     }
   }
 
   async function handleFanSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setFanStatus('loading');
-
     const form = e.currentTarget;
-    const data = {
-      type: 'fan',
-      email: (form.elements.namedItem('fan-email') as HTMLInputElement).value,
-    };
+    const email = (form.elements.namedItem('fan-email') as HTMLInputElement).value.trim();
+    if (!EMAIL_RE.test(email)) {
+      setFanError('Enter a valid email, e.g. you@gmail.com');
+      (form.elements.namedItem('fan-email') as HTMLInputElement).focus();
+      return;
+    }
+    setFanError(null);
+    setFanStatus('loading');
+    track('waitlist_submit', { type: 'fan' });
 
     try {
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ type: 'fan', email }),
       });
-
       if (res.ok) {
         setFanStatus('success');
+        track('waitlist_success', { type: 'fan' });
       } else {
         setFanStatus('error');
+        track('waitlist_error', { type: 'fan' });
       }
     } catch {
       setFanStatus('error');
+      track('waitlist_error', { type: 'fan' });
+    }
+  }
+
+  async function copyLink() {
+    track('waitlist_share', { via: 'copy' });
+    try {
+      await navigator.clipboard.writeText(SHARE_URL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* ignore */
     }
   }
 
@@ -103,17 +165,22 @@ export function Waitlist() {
               </div>
 
               {creatorStatus === 'success' ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="flex flex-col items-center justify-center py-10 text-center">
                   <div className="w-14 h-14 rounded-full bg-[#16A34A]/10 flex items-center justify-center mb-4">
                     <Check className="w-7 h-7 text-[#16A34A]" strokeWidth={2.5} />
                   </div>
                   <p className="font-display font-700 text-lg text-[#0F0F23] mb-1">
-                    You&apos;re on the list!
+                    {creatorPos != null && creatorPos <= 50
+                      ? `You're founding creator #${creatorPos} 🎉`
+                      : "You're on the list! 🎉"}
                   </p>
-                  <p className="text-sm text-[#64748B]">We&apos;ll reach out soon with next steps.</p>
+                  <p className="text-sm text-[#64748B] max-w-xs">
+                    Marc, the founder, personally reviews every creator application — expect a reply
+                    within 48 hours.
+                  </p>
                 </div>
               ) : (
-                <form onSubmit={handleCreatorSubmit} noValidate aria-label="Creator waitlist signup">
+                <form onSubmit={handleCreatorSubmit} onFocus={startCreator} noValidate aria-label="Creator waitlist signup">
                   <div className="space-y-4">
                     <div>
                       <label htmlFor="creator-name" className="sr-only">Your name</label>
@@ -122,10 +189,13 @@ export function Waitlist() {
                         name="creator-name"
                         type="text"
                         placeholder="Your name"
-                        required
                         autoComplete="name"
-                        className={inputClass}
+                        aria-invalid={!!creatorErrors.name}
+                        className={creatorErrors.name ? inputErrClass : inputClass}
                       />
+                      {creatorErrors.name && (
+                        <p className="text-xs text-red-600 mt-1.5">{creatorErrors.name}</p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="creator-email" className="sr-only">Email address</label>
@@ -134,10 +204,13 @@ export function Waitlist() {
                         name="creator-email"
                         type="email"
                         placeholder="Email address"
-                        required
                         autoComplete="email"
-                        className={inputClass}
+                        aria-invalid={!!creatorErrors.email}
+                        className={creatorErrors.email ? inputErrClass : inputClass}
                       />
+                      {creatorErrors.email && (
+                        <p className="text-xs text-red-600 mt-1.5">{creatorErrors.email}</p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="creator-handle" className="sr-only">Social handle</label>
@@ -234,17 +307,56 @@ export function Waitlist() {
               </div>
 
               {fanStatus === 'success' ? (
-                <div className="flex flex-col items-center justify-center py-12 text-center flex-1">
+                <div className="flex flex-col items-center justify-center py-8 text-center flex-1">
                   <div className="w-14 h-14 rounded-full bg-[#16A34A]/10 flex items-center justify-center mb-4">
                     <Check className="w-7 h-7 text-[#16A34A]" strokeWidth={2.5} />
                   </div>
-                  <p className="font-display font-700 text-lg text-[#0F0F23] mb-1">
-                    You&apos;re in!
-                  </p>
-                  <p className="text-sm text-[#64748B]">We&apos;ll notify you when we launch.</p>
+                  <p className="font-display font-700 text-lg text-[#0F0F23] mb-1">You&apos;re in! 🎉</p>
+                  <p className="text-sm text-[#64748B] mb-6">We&apos;ll email you the moment we launch.</p>
+
+                  <div className="w-full bg-[#F1F2F7] rounded-xl p-5">
+                    <p className="text-sm font-600 text-[#0F0F23] mb-3">
+                      Know a creator who should clone themselves?
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      <a
+                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(SHARE_URL)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => track('waitlist_share', { via: 'x' })}
+                        className="text-sm font-600 px-4 py-2 rounded-full bg-[#0F0F23] text-white hover:opacity-90 transition-opacity"
+                      >
+                        Share on X
+                      </a>
+                      <a
+                        href={`https://wa.me/?text=${encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => track('waitlist_share', { via: 'whatsapp' })}
+                        className="text-sm font-600 px-4 py-2 rounded-full bg-[#25D366] text-white hover:opacity-90 transition-opacity"
+                      >
+                        WhatsApp
+                      </a>
+                      <button
+                        type="button"
+                        onClick={copyLink}
+                        className="text-sm font-600 px-4 py-2 rounded-full bg-white border border-black/10 text-[#0F0F23] hover:border-black/20 transition-colors inline-flex items-center gap-1.5"
+                      >
+                        {copied ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-[#16A34A]" /> Copied
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5" /> Copy link
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : (
-                <form onSubmit={handleFanSubmit} noValidate aria-label="Fan waitlist signup" className="flex flex-col flex-1">
+                <form onSubmit={handleFanSubmit} onFocus={startFan} noValidate aria-label="Fan waitlist signup" className="flex flex-col flex-1">
                   <div className="space-y-4 flex-1 flex flex-col">
                     <div>
                       <label htmlFor="fan-email" className="sr-only">Your email address</label>
@@ -253,10 +365,11 @@ export function Waitlist() {
                         name="fan-email"
                         type="email"
                         placeholder="Your email address"
-                        required
                         autoComplete="email"
-                        className={inputClass}
+                        aria-invalid={!!fanError}
+                        className={fanError ? inputErrClass : inputClass}
                       />
+                      {fanError && <p className="text-xs text-red-600 mt-1.5">{fanError}</p>}
                     </div>
                     <button
                       type="submit"
@@ -311,7 +424,6 @@ export function Waitlist() {
             </div>
           </ScrollReveal>
         </div>
-
       </div>
     </section>
   );

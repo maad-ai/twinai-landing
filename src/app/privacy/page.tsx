@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             <section>
               <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">1. Information We Collect</h2>
               <p>
-                When you sign up for the Twiinn AI waitlist, we collect the information you provide directly, including your name, email address, social media handles, follower count, and niche category. For fans, we collect only your email address.
+                Twiinn AI is currently a pre-launch waitlist. We only collect the information you submit on our waitlist form: for creators, your name, email, social handle, follower count, and niche; for fans, just your email. We do not track you across the web, and we do not buy data about you.
               </p>
             </section>
 
@@ -58,18 +58,18 @@ export default function PrivacyPage() {
               <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">5. Your Rights</h2>
               <p>
                 You have the right to access, correct, or delete your personal data at any time. To exercise these rights, contact us at{' '}
-                <a href="mailto:contact@maad-ai.com" className="text-[#A855F7] hover:underline">
-                  contact@maad-ai.com
+                <a href="mailto:contact@twiinn.ai" className="text-[#A855F7] hover:underline">
+                  contact@twiinn.ai
                 </a>.
               </p>
             </section>
 
             <section>
-              <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">6. Contact</h2>
+              <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">6. Contact &amp; Privacy Officer</h2>
               <p>
-                For any questions about this Privacy Policy, please contact us at{' '}
-                <a href="mailto:contact@maad-ai.com" className="text-[#A855F7] hover:underline">
-                  contact@maad-ai.com
+                Twiinn AI is operated from Quebec, Canada. In accordance with Quebec&apos;s Law 25, our designated person responsible for the protection of personal information is Marc-Alexandre Duval. For any privacy question, or to access or delete your data, contact{' '}
+                <a href="mailto:contact@twiinn.ai" className="text-[#A855F7] hover:underline">
+                  contact@twiinn.ai
                 </a>.
               </p>
             </section>

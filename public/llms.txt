@@ -1,36 +1,45 @@
 # Twiinn AI
 
-> Twiinn AI is a SaaS marketplace where influencers and creators build AI chatbot clones of themselves. Fans subscribe monthly to chat with these AI twins 24/7. Creators keep 85-90% of subscription revenue.
+> Twiinn AI is a SaaS marketplace where creators build an AI chatbot "twin" of themselves, trained on their content. Fans subscribe monthly to chat with the twin 24/7. Creators keep 85% of subscription revenue (Twiinn takes a flat 15% platform fee). Currently pre-launch — join the waitlist at https://twiinn.ai/#waitlist.
 
 ## What is Twiinn AI?
 
-Twiinn AI lets content creators (fitness coaches, finance experts, beauty influencers, tech educators, etc.) create an AI-powered chatbot trained on their content — videos, posts, podcasts, and more. The AI twin thinks, talks, and advises like the creator. Fans pay a monthly subscription to access personalized conversations with the AI twin anytime.
+Twiinn AI lets content creators (fitness coaches, finance educators, beauty influencers, tech reviewers, etc.) create an AI-powered chatbot trained on their content — videos, posts, podcasts, and more. The AI twin answers in the creator's tone, with their advice and personality. Fans pay a monthly subscription to chat with it anytime. The creator approves the twin's personality before it goes live and stays in full control (set limits, block topics, review conversations).
 
 ## How it works
 
-1. **Create** — Upload your content or connect your social accounts. We train an AI that mirrors your personality, expertise, and communication style.
-2. **Launch** — Set your subscription price ($9.99–$49.99/month). Your AI twin goes live and is available 24/7.
-3. **Earn** — Fans subscribe to chat with your twin. You keep 85–90% of every subscription. We handle payments, hosting, and AI infrastructure.
+1. **Train** — Connect YouTube, TikTok, or Instagram, or upload content. Twiinn trains an AI that mirrors your style, expertise, and personality.
+2. **Launch** — Set your own monthly subscription price (any amount you choose). Your twin goes live, available 24/7.
+3. **Earn** — Fans subscribe to chat with your twin. You keep 85% of every subscription. Twiinn handles payments, hosting, and AI.
 
 ## Business model
 
-- Creators set their own subscription price
-- Platform commission: 10–15% (early creators get 0% for 6 months)
-- Fans get unlimited conversations with subscribed twins
-- Average creator earnings: $2K–$8K/month depending on audience size
+- Creators set their own subscription price — any amount they want.
+- Platform fee: a flat 15%. Creators keep 85% of every subscription and message credit.
+- Founding offer: the first 50 creators pay 0% platform fees for their first 6 months.
+- Earnings depend on audience size and price. The formula is: subscribers × monthly price × 85%. Example: 250 subscribers at $19.99/month is about $4,248/month to the creator. No guaranteed or average earnings are claimed.
+- Fans get a set number of messages per month included in their subscription and can buy additional message credits.
 
 ## Key features
 
-- AI trained on creator's actual content and personality
+- AI trained on the creator's actual content and personality
 - 24/7 availability — the twin never sleeps
-- Full creator control — set limits, review conversations, block topics
+- Full creator control — approve the personality, set limits, review conversations, block topics
 - Real-time chat with streaming responses
 - Creator dashboard with earnings, subscribers, and message analytics
+
+## Industry context
+
+- Creators are already cloning themselves: CarynAI (Caryn Marjorie) earned $71,610 in its first week (Fortune, 2023); Amouranth's AI earned $34,000 in its first 24 hours (Decrypt, 2023); Grimes invited fans to make AI songs with her voice for a 50% royalty split (Rolling Stone, 2023). Twiinn brings the same capability to any creator without custom tech or a team.
 
 ## Links
 
 - Website: https://twiinn.ai
 - Waitlist: https://twiinn.ai/#waitlist
+- Blog: https://twiinn.ai/blog
+- AI twins are the creator economy's next revenue stream: https://twiinn.ai/blog/ai-twins-creator-economy-next-revenue-stream
+- How much can your AI twin earn (the honest math): https://twiinn.ai/blog/how-much-can-your-ai-twin-earn
+- Train an AI twin that sounds like you: https://twiinn.ai/blog/train-ai-twin-that-sounds-like-you
 - Contact: contact@twiinn.ai
 - Privacy Policy: https://twiinn.ai/privacy
 - Terms of Service: https://twiinn.ai/terms

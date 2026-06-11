@@ -7,6 +7,7 @@ import { HowItWorks } from '@/components/sections/HowItWorks';
 import { ForCreators } from '@/components/sections/ForCreators';
 import { ForFans } from '@/components/sections/ForFans';
 import { Pricing } from '@/components/sections/Pricing';
+import { Founder } from '@/components/sections/Founder';
 import { Waitlist } from '@/components/sections/Waitlist';
 import { FAQ } from '@/components/sections/FAQ';
 import { FinalCTA } from '@/components/sections/FinalCTA';
@@ -47,6 +48,7 @@ export default function Home() {
         <ForCreators />
         <Pricing />
         <ForFans />
+        <Founder />
         <Waitlist />
         <FAQ />
         <FinalCTA />

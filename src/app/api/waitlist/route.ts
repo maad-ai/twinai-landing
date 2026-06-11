@@ -1,17 +1,29 @@
 import { Resend } from 'resend';
+import { saveSignup } from '@/lib/waitlist';
 
 export const dynamic = 'force-dynamic';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, email, name, handle, followers, niche } = body;
+    const { type, email, name, handle, followers, niche, ref } = body;
 
-    if (!email || !type) {
+    if (!email || !type || !EMAIL_RE.test(String(email)) || (type !== 'creator' && type !== 'fan')) {
       return Response.json(
-        { error: 'Email and type are required' },
+        { error: 'A valid email and type (creator or fan) are required' },
         { status: 400 }
       );
+    }
+
+    // Persist first so a signup is never lost to an email hiccup.
+    let creatorPosition: number | null = null;
+    try {
+      const result = await saveSignup({ type, email, name, handle, followers, niche, ref });
+      creatorPosition = result.creatorPosition;
+    } catch (dbErr) {
+      console.error('Waitlist persistence failed:', dbErr);
     }
 
     // Try to send email notification (non-blocking — don't fail if email fails)
@@ -56,9 +68,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // Always return success — the signup is registered
-    // (In production, also save to Supabase waitlist table)
-    return Response.json({ success: true });
+    return Response.json({ success: true, creatorPosition });
   } catch (err) {
     console.error('Waitlist API error:', err);
     return Response.json(

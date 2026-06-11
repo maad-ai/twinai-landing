@@ -31,7 +31,7 @@ export function getOrganizationSchema() {
     sameAs: [],
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'contact@maad-ai.com',
+      email: 'contact@twiinn.ai',
       contactType: 'customer support',
     },
   };
