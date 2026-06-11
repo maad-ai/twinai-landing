@@ -104,9 +104,12 @@ export async function diagnoseRedis(): Promise<{
   urlScheme: string | null;
   ok: boolean;
   error: string | null;
+  envNames?: string[];
 }> {
+  // Names only (never values) of any redis-looking env vars the runtime sees.
+  const envNames = Object.keys(process.env).filter((k) => /UPSTASH|REDIS|^KV_/i.test(k));
   const creds = redisCreds();
-  if (!creds) return { creds: false, urlScheme: null, ok: false, error: 'no-credentials' };
+  if (!creds) return { creds: false, urlScheme: null, ok: false, error: 'no-credentials', envNames };
   const urlScheme = creds.url.split(':')[0];
   try {
     await redis(['PING']);
