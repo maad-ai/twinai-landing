@@ -19,8 +19,8 @@ const money = (n: number, decimals = 0) =>
     maximumFractionDigits: decimals,
   });
 
-export function Pricing() {
-  const [price, setPrice] = useState(19.99);
+export function Pricing({ initialPrice = 19.99 }: { initialPrice?: number }) {
+  const [price, setPrice] = useState(initialPrice);
   const [subs, setSubs] = useState(250);
   const [shared, setShared] = useState(false);
   const interacted = useRef(false);
