@@ -32,7 +32,7 @@ export default function TermsPage() {
             <section>
               <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">2. Description of Service</h2>
               <p>
-                Twiinn AI is a platform that allows creators to build AI-powered chatbots trained on their content. Fans can subscribe monthly to interact with these AI twins. Creators retain 85% of subscription revenue.
+                Twiinn AI is a platform that allows creators to build AI-powered chatbots trained on their content. Fans can subscribe monthly to interact with these AI twins. Creators retain 80% of subscription revenue.
               </p>
             </section>
 
@@ -53,7 +53,7 @@ export default function TermsPage() {
             <section>
               <h2 className="font-display font-700 text-xl text-[#0F0F23] mb-3">5. Payments and Commission</h2>
               <p>
-                Twiinn AI retains a flat 15% platform fee on all subscriptions — you keep 85%. Founding creators pay 0% for their first 6 months. Payouts are processed monthly to your connected payment account.
+                Twiinn AI retains a flat 20% platform fee on all subscriptions — you keep 80%. Founding creators pay 0% for their first 6 months. Payouts are processed monthly to your connected payment account.
               </p>
             </section>
 

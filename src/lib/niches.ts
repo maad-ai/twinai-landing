@@ -19,9 +19,9 @@ export const nichePages: NichePage[] = [
     audience: 'fitness coaches',
     title: 'AI Twin for Fitness Coaches — Coach Every Fan, 24/7',
     description:
-      'Turn your training knowledge into an AI twin. Fans subscribe monthly for personalized programming, form advice and nutrition answers — you keep 85%.',
+      'Turn your training knowledge into an AI twin. Fans subscribe monthly for personalized programming, form advice and nutrition answers — you keep 80%.',
     h1: 'Your coaching, cloned.',
-    sub: 'An AI twin trained on your programs, videos and advice answers every fan — form checks, plateaus, meal questions — while you train your real clients. You keep 85%.',
+    sub: 'An AI twin trained on your programs, videos and advice answers every fan — form checks, plateaus, meal questions — while you train your real clients. You keep 80%.',
     price: 19.99,
     painPoints: [
       {
@@ -54,7 +54,7 @@ export const nichePages: NichePage[] = [
       },
       {
         q: 'What do fitness fans usually pay?',
-        a: 'Most coaching-style twins price between $14.99 and $29.99/month. You set any price and keep 85%.',
+        a: 'Most coaching-style twins price between $14.99 and $29.99/month. You set any price and keep 80%.',
       },
     ],
   },
@@ -63,9 +63,9 @@ export const nichePages: NichePage[] = [
     audience: 'finance creators',
     title: 'AI Twin for Finance Creators — Answer Every Money Question',
     description:
-      'Your audience has endless money questions. An AI twin trained on your content answers them 24/7 — fans subscribe monthly, you keep 85%.',
+      'Your audience has endless money questions. An AI twin trained on your content answers them 24/7 — fans subscribe monthly, you keep 80%.',
     h1: 'Be everyone\'s money mentor.',
-    sub: 'Budgeting, investing basics, side-hustle math — your twin answers with your frameworks and your voice, 24/7. Fans subscribe monthly, you keep 85%.',
+    sub: 'Budgeting, investing basics, side-hustle math — your twin answers with your frameworks and your voice, 24/7. Fans subscribe monthly, you keep 80%.',
     price: 49.99,
     painPoints: [
       {
@@ -94,7 +94,7 @@ export const nichePages: NichePage[] = [
       },
       {
         q: 'Why do finance twins charge more?',
-        a: 'Fans treat them like a money mentor on call. $29.99–$49.99/month is common in this niche — you set the price and keep 85%.',
+        a: 'Fans treat them like a money mentor on call. $29.99–$49.99/month is common in this niche — you set the price and keep 80%.',
       },
       {
         q: 'Is the twin clearly an AI to my audience?',
@@ -107,9 +107,9 @@ export const nichePages: NichePage[] = [
     audience: 'beauty creators',
     title: 'AI Twin for Beauty Creators — Personalized Routines at Scale',
     description:
-      'Skin types, budgets, routines — every fan is different. Your AI twin gives personalized beauty advice from your content, 24/7. You keep 85%.',
+      'Skin types, budgets, routines — every fan is different. Your AI twin gives personalized beauty advice from your content, 24/7. You keep 80%.',
     h1: 'A routine for every single fan.',
-    sub: 'Oily T-zone, sensitive skin, $30 budget — your twin tailors your advice to every fan\'s situation, exactly like your DMs, minus the burnout. You keep 85%.',
+    sub: 'Oily T-zone, sensitive skin, $30 budget — your twin tailors your advice to every fan\'s situation, exactly like your DMs, minus the burnout. You keep 80%.',
     price: 14.99,
     painPoints: [
       {
@@ -142,7 +142,7 @@ export const nichePages: NichePage[] = [
       },
       {
         q: 'What do beauty fans usually pay?',
-        a: 'Beauty twins typically run $9.99–$19.99/month. You set any price and keep 85%.',
+        a: 'Beauty twins typically run $9.99–$19.99/month. You set any price and keep 80%.',
       },
     ],
   },

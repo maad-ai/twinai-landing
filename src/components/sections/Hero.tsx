@@ -4,7 +4,7 @@ import { StoreBadges } from '@/components/ui/StoreBadges';
 import { Check, Shield, Moon, Send, ArrowRight } from 'lucide-react';
 
 const trustItems = [
-  { icon: Check, text: 'Keep 85%' },
+  { icon: Check, text: 'Keep 80%' },
   { icon: Moon, text: 'Works while you sleep' },
   { icon: Shield, text: 'Full control' },
 ];
@@ -211,7 +211,7 @@ export function Hero() {
               <p className="text-lg md:text-xl text-[#475569] max-w-xl mb-4 leading-relaxed">
                 Twiinn builds an AI twin trained on your content. Your fans subscribe monthly to
                 chat with it —{' '}
-                <span className="text-[#0F0F23] font-600">you keep 85%.</span>
+                <span className="text-[#0F0F23] font-600">you keep 80%.</span>
               </p>
             </Enter>
 

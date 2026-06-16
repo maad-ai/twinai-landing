@@ -1,6 +1,6 @@
 # Twiinn AI
 
-> Twiinn AI is a SaaS marketplace where creators build an AI chatbot "twin" of themselves, trained on their content. Fans subscribe monthly to chat with the twin 24/7. Creators keep 85% of subscription revenue (Twiinn takes a flat 15% platform fee). Currently pre-launch — join the waitlist at https://twiinn.ai/#waitlist.
+> Twiinn AI is a SaaS marketplace where creators build an AI chatbot "twin" of themselves, trained on their content. Fans subscribe monthly to chat with the twin 24/7. Creators keep 80% of subscription revenue (Twiinn takes a flat 20% platform fee, the same as OnlyFans). Currently pre-launch — join the waitlist at https://twiinn.ai/#waitlist.
 
 ## What is Twiinn AI?
 
@@ -10,14 +10,14 @@ Twiinn AI lets content creators (fitness coaches, finance educators, beauty infl
 
 1. **Train** — Connect YouTube, TikTok, or Instagram, or upload content. Twiinn trains an AI that mirrors your style, expertise, and personality.
 2. **Launch** — Set your own monthly subscription price (any amount you choose). Your twin goes live, available 24/7.
-3. **Earn** — Fans subscribe to chat with your twin. You keep 85% of every subscription. Twiinn handles payments, hosting, and AI.
+3. **Earn** — Fans subscribe to chat with your twin. You keep 80% of every subscription. Twiinn handles payments, hosting, and AI.
 
 ## Business model
 
 - Creators set their own subscription price — any amount they want.
-- Platform fee: a flat 15%. Creators keep 85% of every subscription and message credit.
+- Platform fee: a flat 20% (same as OnlyFans). Creators keep 80% of every subscription and message credit.
 - Founding offer: the first 50 creators pay 0% platform fees for their first 6 months.
-- Earnings depend on audience size and price. The formula is: subscribers × monthly price × 85%. Example: 250 subscribers at $19.99/month is about $4,248/month to the creator. No guaranteed or average earnings are claimed.
+- Earnings depend on audience size and price. The formula is: subscribers × monthly price × 80%. Example: 250 subscribers at $19.99/month is about $4,000/month to the creator. No guaranteed or average earnings are claimed.
 - Fans get a set number of messages per month included in their subscription and can buy additional message credits.
 
 ## Key features

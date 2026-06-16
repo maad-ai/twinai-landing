@@ -25,7 +25,7 @@ export function Pricing({ initialPrice = 19.99 }: { initialPrice?: number }) {
   const [shared, setShared] = useState(false);
   const interacted = useRef(false);
 
-  const perSub = price * 0.85;
+  const perSub = price * 0.80;
   const monthly = perSub * subs;
 
   function onInteract() {
@@ -64,7 +64,7 @@ export function Pricing({ initialPrice = 19.99 }: { initialPrice?: number }) {
         <ScrollReveal>
           <p className="eyebrow text-[#7C3AED] mb-3">Pricing</p>
           <h2 className="text-display-lg font-display font-800 text-[#0F0F23] mb-6">
-            You set the price. You keep 85%.
+            You set the price. You keep 80%.
           </h2>
           <p className="text-lg text-[#475569] max-w-xl mx-auto mb-12">
             Any price you want — $5 or $100/month, it&apos;s your call. We handle payments,
@@ -170,7 +170,7 @@ export function Pricing({ initialPrice = 19.99 }: { initialPrice?: number }) {
               </div>
             </div>
             <p className="text-xs text-[#94A3B8] mt-4 text-center">
-              Estimate: price × subscribers × 85%. Actual results depend on your audience.
+              Estimate: price × subscribers × 80%. Actual results depend on your audience.
             </p>
 
             {/* CTA at the emotional peak */}

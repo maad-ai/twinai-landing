@@ -111,7 +111,7 @@ export function TheShift() {
           <p className="text-center text-[15px] text-[#475569] mt-10 max-w-xl mx-auto">
             They needed custom tech and big teams.{' '}
             <span className="text-[#0F0F23] font-600">
-              Twiinn gives you the same in minutes — and you keep 85% of the revenue.
+              Twiinn gives you the same in minutes — and you keep 80% of the revenue.
             </span>
           </p>
           <p className="text-center text-xs text-[#94A3B8] mt-6 max-w-2xl mx-auto">

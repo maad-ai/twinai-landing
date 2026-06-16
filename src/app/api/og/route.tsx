@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const price = Math.min(Math.max(parseFloat(searchParams.get('p') || '19.99'), 1), 999);
   const subs = Math.min(Math.max(parseInt(searchParams.get('s') || '250', 10), 1), 1_000_000);
-  const monthly = price * 0.85 * subs;
+  const monthly = price * 0.80 * subs;
 
   return new ImageResponse(
     (
@@ -68,7 +68,7 @@ export async function GET(request: Request) {
           {[
             `${money(subs)} subscribers`,
             `$${price.toFixed(2)}/mo each`,
-            'You keep 85%',
+            'You keep 80%',
           ].map((t) => (
             <div
               key={t}

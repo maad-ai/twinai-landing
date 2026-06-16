@@ -32,7 +32,7 @@ const features = [
   },
   {
     title: 'Track earnings in your dashboard',
-    desc: 'Subscribers, messages, revenue in real time. You keep 85% of every subscription.',
+    desc: 'Subscribers, messages, revenue in real time. You keep 80% of every subscription.',
   },
   {
     title: 'Stay in full control',

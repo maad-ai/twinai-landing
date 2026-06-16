@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: '%s | Twiinn AI',
   },
   description:
-    'Create an AI twin of yourself. Let your audience connect with you even when you\'re offline. Fans subscribe monthly — you keep 85% and earn 24/7.',
+    'Create an AI twin of yourself. Let your audience connect with you even when you\'re offline. Fans subscribe monthly — you keep 80% and earn 24/7.',
   keywords: [
     'AI clone',
     'creator monetization',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: 'Twiinn AI',
     title: 'Twiinn AI — Your fans can talk to your AI twin.',
     description:
-      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85% and earn 24/7.',
+      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 80% and earn 24/7.',
     images: [
       {
         url: '/og-image.png',
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Twiinn AI — Your fans can talk to your AI twin.',
     description:
-      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 85%.',
+      'Create an AI twin of yourself. Fans subscribe monthly to chat with it. You keep 80%.',
     images: ['/og-image.png'],
     creator: '@twiinnai',
   },

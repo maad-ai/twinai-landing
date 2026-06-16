@@ -55,7 +55,7 @@ export function getFAQSchema() {
         name: 'How much can I earn with Twiinn AI?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Your earnings = subscribers × your price × 85%. If 1% of a 50K audience subscribes at $14.99/month, that is about $6,400/month to you. It scales with audience size and engagement.',
+          text: 'Your earnings = subscribers × your price × 80%. If 1% of a 50K audience subscribes at $14.99/month, that is about $6,000/month to you. It scales with audience size and engagement.',
         },
       },
       {
@@ -71,7 +71,7 @@ export function getFAQSchema() {
         name: 'What is the Twiinn AI commission structure?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'We take a flat 15% platform fee — you keep 85% of every subscription and message credit. Founding creators pay 0% for their first 6 months.',
+          text: 'We take a flat 20% platform fee — you keep 80% of every subscription and message credit. Founding creators pay 0% for their first 6 months.',
         },
       },
       {

@@ -10,7 +10,7 @@ const faqs = [
   },
   {
     q: 'How much can I earn?',
-    a: 'Your earnings = subscribers × your price × 85%. If 1% of a 50K audience subscribes at $14.99/month, that’s about $6,400/month to you. It scales with audience size and engagement — no guarantees.',
+    a: 'Your earnings = subscribers × your price × 80%. If 1% of a 50K audience subscribes at $14.99/month, that’s about $6,000/month to you. It scales with audience size and engagement — no guarantees.',
   },
   {
     q: "Can my twin say something I wouldn't?",
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "What's the commission structure?",
-    a: 'We take a flat 15% platform fee — you keep 85% of every subscription and message credit. Founding creators pay 0% for their first 6 months.',
+    a: 'We take a flat 20% platform fee — you keep 80% of every subscription and message credit. Founding creators pay 0% for their first 6 months.',
   },
   {
     q: 'What if a fan runs out of messages?',

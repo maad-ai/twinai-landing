@@ -41,7 +41,7 @@ export const blogPosts: BlogPost[] = [
         h2: 'The catch with the first wave',
         paragraphs: [
           'Caryn Marjorie and Amouranth needed custom tech partners and big teams to launch their AIs. They were also early — the tooling was rough, and Caryn later lost control of her own clone when the company behind it imploded. The lesson: creators need to own their twin, control what it says, and keep the majority of the revenue.',
-          'That’s exactly what we’re building at Twiinn: you train your twin on your own content, you approve its personality before it goes live, you set the price — and you keep 85% of every subscription. The first 50 founding creators pay 0% platform fees for six months.',
+          'That’s exactly what we’re building at Twiinn: you train your twin on your own content, you approve its personality before it goes live, you set the price — and you keep 80% of every subscription. The first 50 founding creators pay 0% platform fees for six months.',
         ],
       },
     ],
@@ -50,20 +50,20 @@ export const blogPosts: BlogPost[] = [
     slug: 'how-much-can-your-ai-twin-earn',
     title: 'How much can your AI twin earn? The honest math',
     description:
-      'No invented "average creator earnings" — just the formula: subscribers × your price × 85%, and what it takes to hit each milestone.',
+      'No invented "average creator earnings" — just the formula: subscribers × your price × 80%, and what it takes to hit each milestone.',
     date: '2026-06-10',
     readTime: '4 min read',
     category: 'Monetization',
     sections: [
       {
         paragraphs: [
-          'Most platforms promise vague riches. We’d rather show you the formula, because it’s simple: your earnings = subscribers × your monthly price × 85% (we take a flat 15% — and founding creators pay 0% for their first six months).',
+          'Most platforms promise vague riches. We’d rather show you the formula, because it’s simple: your earnings = subscribers × your monthly price × 80% (we take a flat 20% — the same as OnlyFans — and founding creators pay 0% for their first six months).',
         ],
       },
       {
         h2: 'Three realistic scenarios',
         paragraphs: [
-          'Say you charge $14.99/month. If 0.5% of a 50K audience subscribes — that’s 250 fans — you earn about $3,185/month. At 1% (500 fans), it’s $6,370/month. With a 500K audience converting at just 0.5%, you’re at $31,800/month.',
+          'Say you charge $14.99/month. If 0.5% of a 50K audience subscribes — that’s 250 fans — you earn about $3,000/month. At 1% (500 fans), it’s $6,000/month. With a 500K audience converting at just 0.5%, you’re at $30,000/month.',
           'Conversion depends on one thing above all: how much your audience already asks you questions. Fitness coaches, finance educators, skincare experts and tech reviewers see the highest demand, because fans have specific, personal questions that generic content can’t answer.',
         ],
       },

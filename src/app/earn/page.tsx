@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 function parse(sp: Record<string, string | string[] | undefined>) {
   const p = Math.min(Math.max(parseFloat((sp.p as string) || '19.99') || 19.99, 1), 999);
   const s = Math.min(Math.max(parseInt((sp.s as string) || '250', 10) || 250, 1), 1_000_000);
-  return { price: p, subs: s, monthly: p * 0.85 * s };
+  return { price: p, subs: s, monthly: p * 0.80 * s };
 }
 
 const money = (n: number) => n.toLocaleString('en-US', { maximumFractionDigits: 0 });
@@ -22,7 +22,7 @@ export async function generateMetadata({
   const { price, subs, monthly } = parse(sp);
   const ogUrl = `https://twiinn.ai/api/og?p=${price}&s=${subs}`;
   const title = `An AI twin could earn $${money(monthly)}/month`;
-  const description = `${money(subs)} subscribers at $${price.toFixed(2)}/mo, keeping 85%. See what your AI twin could earn on Twiinn.`;
+  const description = `${money(subs)} subscribers at $${price.toFixed(2)}/mo, keeping 80%. See what your AI twin could earn on Twiinn.`;
   return {
     title,
     description,
@@ -67,7 +67,7 @@ export default async function EarnPage({
             <span className="text-2xl text-[#64748B] font-600"> /month</span>
           </p>
           <p className="text-lg text-[#475569] mb-10">
-            {money(subs)} subscribers at ${price.toFixed(2)}/mo, keeping 85% — while you sleep.
+            {money(subs)} subscribers at ${price.toFixed(2)}/mo, keeping 80% — while you sleep.
           </p>
           <a
             href="/#waitlist"
@@ -77,7 +77,7 @@ export default async function EarnPage({
             <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
           </a>
           <p className="text-xs text-[#94A3B8] mt-6 max-w-md mx-auto">
-            Estimate: subscribers × price × 85%. Actual results depend on your audience.
+            Estimate: subscribers × price × 80%. Actual results depend on your audience.
           </p>
         </div>
       </main>
